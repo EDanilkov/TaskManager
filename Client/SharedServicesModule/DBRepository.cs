@@ -8,7 +8,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
 using SharedServicesModule;
 using System.Windows;
 using System.Windows.Input;

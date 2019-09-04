@@ -42,7 +42,7 @@ namespace BusinessLogicModule
                             NewResponseModel newAddNewMembers = await _dbRepository.AddPermission(AddNewMembers);
                             NewResponseModel newDeleteMembers = await _dbRepository.AddPermission(DeleteMembers);
                             NewResponseModel newChangeRole = await _dbRepository.AddPermission(ChangeRole);
-                            List<Permission> permissions = new List<Permission>() { (await _dbRepository.GetPermission("AddNewTask")), (await _dbRepository.GetPermission("DeleteTask")), (await _dbRepository.GetPermission("VisibilityTask")), (await _dbRepository.GetPermission("DeleteProject")), (await _dbRepository.GetPermission("AddNewMembers")), (await _dbRepository.GetPermission("DeleteMembers")), (await _dbRepository.GetPermission("ChangeRole")) };
+                            List<Permission> permissions = new List<Permission>() { (await _dbRepository.GetPermission("AddNewTask")), (await _dbRepository.GetPermission("AddNewTask")), (await _dbRepository.GetPermission("DeleteTask")), (await _dbRepository.GetPermission("VisibilityTask")), (await _dbRepository.GetPermission("DeleteProject")), (await _dbRepository.GetPermission("AddNewMembers")), (await _dbRepository.GetPermission("DeleteMembers")), (await _dbRepository.GetPermission("ChangeRole")) };
                             Role Admin = new Role() { Name = "Admin" };
                             Role Developer = new Role() { Name = "Developer"};
                             Role Manager = new Role() { Name = "Manager"};

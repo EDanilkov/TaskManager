@@ -55,7 +55,8 @@ namespace ServerAPI.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                Response.StatusCode = 500;
+                await Response.WriteAsync(ex.Message);
             }
 
         }

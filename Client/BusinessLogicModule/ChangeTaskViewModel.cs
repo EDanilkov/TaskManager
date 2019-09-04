@@ -1,11 +1,7 @@
 ﻿using BusinessLogicModule.ViewModel;
-using Newtonsoft.Json;
 using SharedServicesModule;
 using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
 

@@ -44,7 +44,16 @@ namespace ServerAPI.Controllers
             NewResponseModel newTaskResponseModel = new NewResponseModel();
             try
             {
-                newTaskResponseModel = await _db.ChangeTask(updateTaskModel);
+                Data.Task task = await _db.GetTask(updateTaskModel.Task.Id); //Data.Task.FirstAsync(c => c.Id == updateTaskModel.Task.Id);
+                task.Name = updateTaskModel.TaskName;
+                task.Description = updateTaskModel.TaskDescription;
+                task.UserId = updateTaskModel.UserId;
+                task.EndDate = updateTaskModel.TaskFinishDate;
+
+
+                /*newTaskResponseModel =*/ await _db.ChangeTask(task);
+                newTaskResponseModel.CreatedId = task.Id;
+                newTaskResponseModel.Message = "Success !!!";
                 return Ok(newTaskResponseModel);
             }
             catch (Exception ex)

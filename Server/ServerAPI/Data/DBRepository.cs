@@ -38,26 +38,17 @@ namespace ServerAPI.Data
             _db.Project.Remove(project);
             _db.SaveChanges();
         }
-
-        public async Task<NewResponseModel> ChangeTask(UpdateTaskModel updateTaskModel)
+        
+        public async TaskThreading ChangeTask(Task task)
         {
-            NewResponseModel newTaskResponseModel = new NewResponseModel();
-            Task task = await _db.Task.FirstAsync(c => c.Id == updateTaskModel.Task.Id);
-            task.Name = updateTaskModel.TaskName;
-            task.Description = updateTaskModel.TaskDescription;
-            task.UserId = updateTaskModel.UserId;
-            task.EndDate = updateTaskModel.TaskFinishDate;
             await _db.SaveChangesAsync();
-            newTaskResponseModel.Message = "Success !!!";
-            newTaskResponseModel.CreatedId = task.Id;
-            return newTaskResponseModel;
         }
 
         public async Task<List<Task>> GetTasks()
             => await _db.Task.ToListAsync();
 
         public async Task<List<Task>> GetTasks(int userId, int projectId)
-            => (await GetTasks()).Where(c => c.Project.Id == projectId && c.UserId == userId).ToList();
+            => (await GetTasks()).Where(c => c.ProjectId == projectId && c.UserId == userId).ToList();
 
         public async Task<Task> GetTask(int taskId)
             => await _db.Task.Where(c => c.Id == taskId).FirstAsync();

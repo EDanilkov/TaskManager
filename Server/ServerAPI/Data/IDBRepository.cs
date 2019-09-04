@@ -16,7 +16,7 @@ namespace ServerAPI.Data
         TaskThreading DeleteTask(Task task);
         TaskThreading DeleteTask(int taskId);
         TaskThreading DeleteProject(int projectId);
-        Task<NewResponseModel> ChangeTask(UpdateTaskModel updateTaskModel);
+        TaskThreading ChangeTask(Task task);
         Task<List<Task>> GetTasks();
         Task<List<Task>> GetTasks(int userId, int projectId);
         Task<Task> GetTask(int taskId);
