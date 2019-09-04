@@ -1,0 +1,90 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using ServerAPI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using TaskThreading = System.Threading.Tasks.Task;
+
+namespace ServerAPI.Data
+{
+    public interface IDBRepository
+    {
+        #region Task
+
+        TaskThreading AddTask(Task task);
+        TaskThreading DeleteTask(Task task);
+        TaskThreading DeleteTask(int taskId);
+        TaskThreading DeleteProject(int projectId);
+        Task<NewResponseModel> ChangeTask(UpdateTaskModel updateTaskModel);
+        Task<List<Task>> GetTasks();
+        Task<List<Task>> GetTasks(int userId, int projectId);
+        Task<Task> GetTask(int taskId);
+        Task<List<Task>> GetTasksFromUser(int userId);
+        Task<List<Task>> GetProjectTasksFromUser(int userId, int projectId);
+
+        #endregion
+
+        #region Role
+
+        TaskThreading AddRole(Role role);
+        Task<List<Role>> GetRoles();
+        Task<Role> GetRole(string roleName);
+        Task<Role> GetRole(int roleId);
+
+        #endregion
+
+        #region Permission
+
+        TaskThreading AddPermission(Permission permission);
+        Task<Permission> GetPermission(int permissionId);
+        Task<Permission> GetPermission(string permissionName);
+        Task<List<Permission>> GetPermissionsByRole(int roleId);
+
+        #endregion
+
+        #region UserProject
+
+        TaskThreading AddUserProject(UserProject userProject);
+        TaskThreading DeleteUserProject(UserProject userProject);
+        Task<List<UserProject>> GetUserProject();
+        Task<UserProject> GetUserProject(int userId, int projectId);
+        Task<UserProject> GetUserProject(string userName, int projectId);
+        Task<List<UserProject>> GetUserProjectByProjectId(int projectId);
+        Task<List<UserProject>> GetUserProjectByUserId(int userId);
+
+        #endregion
+
+        #region RolePermission
+
+        TaskThreading AddRolePermission(RolePermission rolePermission);
+        Task<List<RolePermission>> GetRolePermissionByRoleId(int roleId);
+
+        #endregion
+
+        #region Project
+
+        TaskThreading AddProject(Project project);
+        TaskThreading DeleteTasksFromProject(int projectId);
+        TaskThreading DeleteUsersFromProject(int projectId);
+        TaskThreading DeleteUserFromProject(int userId, int projectId);
+        TaskThreading DeleteTasksFromUser(int userId, int projectId);
+        Task<Project> GetProject(int projectId);
+        Task<List<Project>> GetProjects();
+        Task<List<User>> GetUsersFromProject(int projectId);
+        Task<List<Task>> GetTasksFromProject(int projectId);
+
+        #endregion
+
+        #region User
+
+        TaskThreading AddUser(User user);
+        Task<Role> GetRoleFromUser(string userName, int projectId);
+        Task<List<User>> GetUsers();
+        Task<User> GetUser(string name);
+        Task<User> GetUser(int id);
+        Task<List<Project>> GetProjectsFromUser(string userName);
+
+        #endregion
+    }
+}
