@@ -138,8 +138,6 @@
     <Compile Include="Pages\Task.xaml.cs">
       <DependentUpon>Task.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -220,9 +218,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\home.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogicModule\BusinessLogicModule.csproj">

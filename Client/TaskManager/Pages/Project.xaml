@@ -439,7 +439,7 @@
                             <ListBox
                                 SelectedValue="{Binding SelectedTask}"
                                 ItemsSource="{Binding ListUserTask}" 
-                                Background="#BDBDBD">
+                                Background="#8C9EFF">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="MouseUp">
                                         <i:InvokeCommandAction Command="{Binding TaskOpenButtonClick}"/>

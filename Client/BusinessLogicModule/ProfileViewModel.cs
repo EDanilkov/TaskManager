@@ -1,4 +1,4 @@
-﻿using BusinessLogicModule.ViewModel;
+﻿ using BusinessLogicModule.ViewModel;
 using Newtonsoft.Json;
 using SharedServicesModule;
 using System;

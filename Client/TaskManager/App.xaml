@@ -37,7 +37,6 @@
                     <!--Цвет-->
                     <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.indigo.xaml">
-                            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:UIModule.ViewModel" />
                         </ResourceDictionary>
                     </ResourceDictionary.MergedDictionaries>
                     <!--Оттенок-->
