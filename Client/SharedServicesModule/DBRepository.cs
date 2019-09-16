@@ -16,8 +16,6 @@ namespace SharedServicesModule
 {
     public class DBRepository : IRepository
     {
-        private TaskManagerDb db = new TaskManagerDb();
-
         public async Task<NewResponseModel> AddTask(Task task)
         {
             try

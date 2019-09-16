@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using ServerAPI.Authorization;
 using ServerAPI.Data;
+using ServerAPI.Models;
+using System.Collections.Generic;
 
 namespace ServerAPI
 {
@@ -60,8 +62,9 @@ namespace ServerAPI
             services.AddMvc();
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
-            
         }
+
+        
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {

@@ -27,22 +27,22 @@ namespace BusinessLogicModule
                         if (roles.Count == 0)
                         {
                             Permission AddNewTask = new Permission() { Name = "AddNewTask" };
+                            await _dbRepository.AddPermission(AddNewTask);
                             Permission ChangeTask = new Permission() { Name = "ChangeTask" };
+                            await _dbRepository.AddPermission(ChangeTask);
                             Permission DeleteTask = new Permission() { Name = "DeleteTask" };
+                            await _dbRepository.AddPermission(DeleteTask);
                             Permission VisibilityTask = new Permission() { Name = "VisibilityTask" };
+                            await _dbRepository.AddPermission(VisibilityTask);
                             Permission DeleteProject = new Permission() { Name = "DeleteProject" };
+                            await _dbRepository.AddPermission(DeleteProject);
                             Permission AddNewMembers = new Permission() { Name = "AddNewMembers" };
+                            await _dbRepository.AddPermission(AddNewMembers);
                             Permission DeleteMembers = new Permission() { Name = "DeleteMembers" };
+                            await _dbRepository.AddPermission(DeleteMembers);
                             Permission ChangeRole = new Permission() { Name = "ChangeRole" };
-                            NewResponseModel newAddNewTask = await _dbRepository.AddPermission(AddNewTask);
-                            NewResponseModel newChangeTask = await _dbRepository.AddPermission(ChangeTask);
-                            NewResponseModel newDeleteTask = await _dbRepository.AddPermission(DeleteTask);
-                            NewResponseModel newVisibilityTask = await _dbRepository.AddPermission(VisibilityTask);
-                            NewResponseModel newDeleteProject = await _dbRepository.AddPermission(DeleteProject);
-                            NewResponseModel newAddNewMembers = await _dbRepository.AddPermission(AddNewMembers);
-                            NewResponseModel newDeleteMembers = await _dbRepository.AddPermission(DeleteMembers);
-                            NewResponseModel newChangeRole = await _dbRepository.AddPermission(ChangeRole);
-                            List<Permission> permissions = new List<Permission>() { (await _dbRepository.GetPermission("AddNewTask")), (await _dbRepository.GetPermission("AddNewTask")), (await _dbRepository.GetPermission("DeleteTask")), (await _dbRepository.GetPermission("VisibilityTask")), (await _dbRepository.GetPermission("DeleteProject")), (await _dbRepository.GetPermission("AddNewMembers")), (await _dbRepository.GetPermission("DeleteMembers")), (await _dbRepository.GetPermission("ChangeRole")) };
+                            await _dbRepository.AddPermission(ChangeRole);
+                            List<Permission> permissions = new List<Permission>() { (await _dbRepository.GetPermission("AddNewTask")), (await _dbRepository.GetPermission("ChangeTask")), (await _dbRepository.GetPermission("DeleteTask")), (await _dbRepository.GetPermission("VisibilityTask")), (await _dbRepository.GetPermission("DeleteProject")), (await _dbRepository.GetPermission("AddNewMembers")), (await _dbRepository.GetPermission("DeleteMembers")), (await _dbRepository.GetPermission("ChangeRole")) };
                             Role Admin = new Role() { Name = "Admin" };
                             Role Developer = new Role() { Name = "Developer"};
                             Role Manager = new Role() { Name = "Manager"};

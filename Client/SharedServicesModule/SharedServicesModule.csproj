@@ -99,7 +99,6 @@
     <Compile Include="Role.cs" />
     <Compile Include="RolePermission.cs" />
     <Compile Include="Task.cs" />
-    <Compile Include="TaskManagerDb.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserProject.cs" />
   </ItemGroup>

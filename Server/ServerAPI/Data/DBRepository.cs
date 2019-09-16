@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using TaskThreading = System.Threading.Tasks.Task;
 using System.Linq;
 using ServerAPI.Models;
+using System;
 
 namespace ServerAPI.Data
 {
@@ -15,7 +16,7 @@ namespace ServerAPI.Data
 
         public async TaskThreading AddTask(Task task)
         {
-            _db.Task.Add(task);
+            await _db.Task.AddAsync(task);
             await _db.SaveChangesAsync();
         }
 
@@ -65,7 +66,7 @@ namespace ServerAPI.Data
 
         public async TaskThreading AddRole(Role role)
         {
-            _db.Role.Add(role);
+            await _db.Role.AddAsync(role);
             await _db.SaveChangesAsync();
         }
         
@@ -84,7 +85,7 @@ namespace ServerAPI.Data
 
         public async TaskThreading AddPermission(Permission permission)
         {
-            _db.Permission.Add(permission);
+            await _db.Permission.AddAsync(permission);
             await _db.SaveChangesAsync();
         }
 
@@ -111,7 +112,7 @@ namespace ServerAPI.Data
 
         public async TaskThreading AddUserProject(UserProject userProject)
         {
-            _db.UserProject.Add(userProject);
+            await _db.UserProject.AddAsync(userProject);
             await _db.SaveChangesAsync();
         }
         
@@ -142,7 +143,7 @@ namespace ServerAPI.Data
 
         public async TaskThreading AddRolePermission(RolePermission rolePermission)
         {
-            _db.RolePermission.Add(rolePermission);
+            await _db.RolePermission.AddAsync(rolePermission);
             await _db.SaveChangesAsync();
         }
 
@@ -156,7 +157,7 @@ namespace ServerAPI.Data
         
         public async TaskThreading AddProject(Project project)
         {
-            _db.Project.Add(project);
+            await _db.Project.AddAsync(project);
             await _db.SaveChangesAsync();
         }
 
@@ -219,8 +220,15 @@ namespace ServerAPI.Data
         
         public async TaskThreading AddUser(User user)
         {
-            _db.User.Add(user);
-            await _db.SaveChangesAsync();
+            try
+            {
+                await _db.User.AddAsync(user);
+                await _db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         
         public async Task<Role> GetRoleFromUser(string userName, int projectId)
