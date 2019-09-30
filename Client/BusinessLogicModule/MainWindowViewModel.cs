@@ -1,11 +1,7 @@
 ﻿using BusinessLogicModule.ViewModel;
-using Newtonsoft.Json;
 using SharedServicesModule;
 using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
@@ -78,7 +74,7 @@ namespace BusinessLogicModule
             {
                 return new DelegateCommand((obj) =>
                 {
-                    if(System.Windows.Application.Current.Properties["UserName"] != null)
+                    if(Application.Current.Properties["UserName"] != null)
                     {
 
                         Navigate("Pages/Profile.xaml");
@@ -97,7 +93,7 @@ namespace BusinessLogicModule
             {
                 return new DelegateCommand((obj) =>
                 {
-                    if (System.Windows.Application.Current.Properties["UserName"] != null)
+                    if (Application.Current.Properties["UserName"] != null)
                     {
                         Navigate("Pages/Projects.xaml");
                     }
@@ -115,7 +111,7 @@ namespace BusinessLogicModule
             {
                 return new DelegateCommand((obj) =>
                 {
-                    System.Windows.Application.Current.Properties["UserName"] = null;
+                    Application.Current.Properties["UserName"] = null;
                     Navigate("Pages/Reg.xaml");
                 });
             }

@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace SharedServicesModule
 {
-
     [Table("UserProject")]
     public partial class UserProject
     {

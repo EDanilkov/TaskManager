@@ -11,57 +11,57 @@ namespace BusinessLogicModule
     {
         IRepository _dbRepository = new DBRepository();
 
-        private string _TaskName;
+        private string _taskName;
         public string TaskName
         {
-            get { return _TaskName; }
+            get { return _taskName; }
             set
             {
-                _TaskName = value;
+                _taskName = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _TaskDescription;
+        private string _taskDescription;
         public string TaskDescription
         {
-            get { return _TaskDescription; }
+            get { return _taskDescription; }
             set
             {
-                _TaskDescription = value;
+                _taskDescription = value;
                 OnPropertyChanged();
             }
         }
 
-        private DateTime _TaskFinishDate = DateTime.Now;
+        private DateTime _taskFinishDate = DateTime.Now;
         public DateTime TaskFinishDate
         {
-            get { return _TaskFinishDate; }
+            get { return _taskFinishDate; }
             set
             {
-                _TaskFinishDate = value;
+                _taskFinishDate = value;
                 OnPropertyChanged();
             }
         }
 
-        private List<User> _Users;
+        private List<User> _users;
         public List<User> Users
         {
-            get { return _Users; }
+            get { return _users; }
             set
             {
-                _Users = value;
+                _users = value;
                 OnPropertyChanged();
             }
         }
 
-        private User _SelectedUser;
+        private User _selectedUser;
         public User SelectedUser
         {
-            get { return _SelectedUser; }
+            get { return _selectedUser; }
             set
             {
-                _SelectedUser = value;
+                _selectedUser = value;
                 OnPropertyChanged();
             }
         }
@@ -74,7 +74,7 @@ namespace BusinessLogicModule
                 {
                     try
                     {
-                        int projectId = int.Parse(System.Windows.Application.Current.Properties["ProjectId"].ToString());
+                        int projectId = int.Parse(Application.Current.Properties["ProjectId"].ToString());
                         Users = await _dbRepository.GetUsersFromProject(projectId);
                     }
                     catch (Exception ex)
@@ -93,8 +93,8 @@ namespace BusinessLogicModule
                 {
                     try
                     {
-                        int projectId = int.Parse(System.Windows.Application.Current.Properties["ProjectId"].ToString());
-                        int taskId = (await _dbRepository.GetTask(int.Parse(System.Windows.Application.Current.Properties["TaskId"].ToString()))).Id;
+                        int projectId = int.Parse(Application.Current.Properties["ProjectId"].ToString());
+                        int taskId = (await _dbRepository.GetTask(int.Parse(Application.Current.Properties["TaskId"].ToString()))).Id;
                         
                         SharedServicesModule.Task task = (await _dbRepository.GetTasks()).Find(c => c.Id == taskId);
                         await _dbRepository.ChangeTask(task, TaskName, TaskDescription, SelectedUser.Id, TaskFinishDate);

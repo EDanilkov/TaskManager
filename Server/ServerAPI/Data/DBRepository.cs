@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TaskThreading = System.Threading.Tasks.Task;
-using System.Linq;
-using ServerAPI.Models;
-using System;
 
 namespace ServerAPI.Data
 {

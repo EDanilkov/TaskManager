@@ -1,10 +1,8 @@
 ﻿using BusinessLogicModule.ViewModel;
 using GalaSoft.MvvmLight.CommandWpf;
-using Newtonsoft.Json;
 using SharedServicesModule;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,46 +14,64 @@ namespace BusinessLogicModule
         {
             Title = "Projects";
         }
-        private ICommand _AddNewProjectClick;
 
+        IRepository _dbRepository = new DBRepository();
+
+        private ICommand _addNewProjectClick;
         public ICommand AddNewProjectClick
         {
             get
             {
-                if (_AddNewProjectClick == null)
+                if (_addNewProjectClick == null)
                 {
-                    _AddNewProjectClick = new RelayCommand(() =>
+                    _addNewProjectClick = new RelayCommand(() =>
                     {
                         Navigate("Pages/AddNewProject.xaml");
                     });
                 }
-                return _AddNewProjectClick;
+                return _addNewProjectClick;
             }
-            set { _AddNewProjectClick = value; }
+            set { _addNewProjectClick = value; }
         }
         
-        IRepository _dbRepository = new DBRepository();
-        
-        private List<Project> _ListProjects = new List<Project>();
+        private List<Project> _listProjects = new List<Project>();
         public List<Project> ListProjects
         {
-            get { return _ListProjects; }
+            get { return _listProjects; }
             set
             {
-                _ListProjects = value;
+                _listProjects = value;
                 OnPropertyChanged();
             }
         }
 
-        private Project _SelectedProject;
+        private Project _selectedProject;
         public Project SelectedProject
         {
-            get { return _SelectedProject; }
+            get { return _selectedProject; }
             set
             {
-                _SelectedProject = value;
+                _selectedProject = value;
                 OnPropertyChanged();
             }
+        }
+
+        private ICommand _selectionChanged;
+        public ICommand SelectionChanged
+        {
+            get
+            {
+                if (_selectionChanged == null)
+                {
+                    _selectionChanged = new RelayCommand(() =>
+                    {
+                        System.Windows.Application.Current.Properties["ProjectId"] = SelectedProject.Id;
+                        Navigate("Pages/Project.xaml");
+                    });
+                }
+                return _selectionChanged;
+            }
+            set { _selectionChanged = value; }
         }
 
         public ICommand Loaded
@@ -77,23 +93,5 @@ namespace BusinessLogicModule
             }
         }
 
-        private ICommand _SelectionChanged;
-
-        public ICommand SelectionChanged
-        {
-            get
-            {
-                if (_SelectionChanged == null)
-                {
-                    _SelectionChanged = new RelayCommand(() =>
-                    {
-                        System.Windows.Application.Current.Properties["ProjectId"] = SelectedProject.Id; 
-                        Navigate("Pages/Project.xaml");
-                    });
-                }
-                return _SelectionChanged;
-            }
-            set { _SelectionChanged = value; }
-        }
     }
 }

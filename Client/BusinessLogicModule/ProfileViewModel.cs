@@ -1,10 +1,8 @@
-﻿ using BusinessLogicModule.ViewModel;
-using Newtonsoft.Json;
+﻿using BusinessLogicModule.ViewModel;
 using SharedServicesModule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,47 +12,47 @@ namespace BusinessLogicModule
     {
         IRepository _dbRepository = new DBRepository();
 
-        private string _Login;
+        private string _login;
         public string Login
         {
-            get { return _Login; }
+            get { return _login; }
             set
             {
-                _Login = value;
+                _login = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _TaskInfo;
+        private string _taskInfo;
         public string TaskInfo
         {
-            get { return _TaskInfo; }
+            get { return _taskInfo; }
             set
             {
-                _TaskInfo = value;
+                _taskInfo = value;
                 OnPropertyChanged();
             }
         }
         
 
-        private List<RecordViewModel> _ListRecords = new List<RecordViewModel>();
+        private List<RecordViewModel> _listRecords = new List<RecordViewModel>();
         public List<RecordViewModel> ListRecords
         {
-            get { return _ListRecords; }
+            get { return _listRecords; }
             set
             {
-                _ListRecords = value;
+                _listRecords = value;
                 OnPropertyChanged();
             }
         }
 
-        private RecordViewModel _SelectedTask = new RecordViewModel();
+        private RecordViewModel _selectedTask = new RecordViewModel();
         public RecordViewModel SelectedTask
         {
-            get { return _SelectedTask; }
+            get { return _selectedTask; }
             set
             {
-                _SelectedTask = value;
+                _selectedTask = value;
                 OnPropertyChanged();
             }
         }
@@ -77,12 +75,19 @@ namespace BusinessLogicModule
                         {
                             Project project = await _dbRepository.GetProject(task.ProjectId);
 
-                            RecordViewModel record = new RecordViewModel();
-                            record.Id = task.Id;
+                            RecordViewModel record = new RecordViewModel()
+                            {
+                                Id = task.Id,
+                                ProjectName = project.Name,
+                                TaskName = task.Name,
+                                BeginDate = task.BeginDate.ToShortDateString(),
+                                EndDate = task.EndDate.ToShortDateString()
+                            };
+                            /*record.Id = task.Id;
                             record.ProjectName = project.Name;
                             record.TaskName = task.Name;
                             record.BeginDate = task.BeginDate.ToShortDateString();
-                            record.EndDate = task.EndDate.ToShortDateString();
+                            record.EndDate = task.EndDate.ToShortDateString();*/
                             records.Add(record);
                         }
                         ListRecords = records;
@@ -95,6 +100,7 @@ namespace BusinessLogicModule
                 });
             }
         }
+
         public ICommand SelectionChanged
         {
             get
@@ -117,7 +123,5 @@ namespace BusinessLogicModule
                 });
             }
         }
-
-        
     }
 }

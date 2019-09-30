@@ -27,11 +27,6 @@
         </Style>
     </Page.Resources>
 
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding Loaded}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
     
     <Page.DataContext>
         <vm:RegViewModel/>

@@ -8,9 +8,6 @@ using UIModule.Pages;
 
 namespace UIModule
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -18,8 +15,6 @@ namespace UIModule
             InitializeComponent();
             Frame.Navigate(new Reg());
             NavigationSetup();
-
-            
 
             App.LanguageChanged += LanguageChanged;
 

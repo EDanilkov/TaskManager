@@ -1,12 +1,6 @@
 ﻿using BusinessLogicModule.ViewModel;
-using Newtonsoft.Json;
 using SharedServicesModule;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity.Validation;
-using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,24 +8,24 @@ namespace BusinessLogicModule
 {
     public class AddNewProjectViewModel : NavigateViewModel
     {
-        private string _ProjectName;
+        private string _projectName;
         public string ProjectName
         {
-            get { return _ProjectName; }
+            get { return _projectName; }
             set
             {
-                _ProjectName = value;
+                _projectName = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _ProjectDescription;
+        private string _projectDescription;
         public string ProjectDescription
         {
-            get { return _ProjectDescription; }
+            get { return _projectDescription; }
             set
             {
-                _ProjectDescription = value;
+                _projectDescription = value;
                 OnPropertyChanged();
             }
         }

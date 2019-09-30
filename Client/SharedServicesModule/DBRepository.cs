@@ -3,14 +3,9 @@ using Newtonsoft.Json;
 using SharedServicesModule.ResponseModel;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using SharedServicesModule;
-using System.Windows;
-using System.Windows.Input;
 
 namespace SharedServicesModule
 {
@@ -66,7 +61,7 @@ namespace SharedServicesModule
             {
 
                 string json = JsonConvert.SerializeObject(rolePermission);
-                return await Requests.Post("https://localhost:44316/api/rolepermissions/new", json);
+                return await Requests.Post("https://localhost:44316/api/role-permissions/new", json);
             }
             catch
             {
@@ -497,7 +492,7 @@ namespace SharedServicesModule
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.PostAsync("https://localhost:44316/api/accountes/token", content);
             TokenResponseModel tokenResponseModel = JsonConvert.DeserializeObject<TokenResponseModel>(await response.Content.ReadAsStringAsync());
-            Properties.Resources.Token = tokenResponseModel.access_token;
+            Properties.Resources.Token = tokenResponseModel.AccessToken;
             return tokenResponseModel;
         }
 

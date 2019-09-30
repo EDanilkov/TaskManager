@@ -15,384 +15,391 @@ namespace BusinessLogicModule
         {
             Title = "Project";
         }
-        private ICommand _AddNewTaskClick;
 
+        IRepository _dbRepository = new DBRepository();
+
+        #region Properties
+
+        private ICommand _addNewTaskClick;
         public ICommand AddNewTaskClick
         {
             get
             {
-                if (_AddNewTaskClick == null)
+                if (_addNewTaskClick == null)
                 {
-                    _AddNewTaskClick = new RelayCommand(() =>
+                    _addNewTaskClick = new RelayCommand(() =>
                     {
                         Navigate("Pages/AddNewTask.xaml");
                     });
                 }
-                return _AddNewTaskClick;
+                return _addNewTaskClick;
             }
-            set { _AddNewTaskClick = value; }
+            set { _addNewTaskClick = value; }
         }
 
-
-
-        IRepository _dbRepository = new DBRepository();
-
-
-        private string _Header;
+        private string _header;
         public string Header
         {
-            get { return _Header; }
+            get { return _header; }
             set
             {
-                _Header = value;
+                _header = value;
                 OnPropertyChanged();
             }
         }
 
-        private List<SharedServicesModule.Task> _ListTasks = new List<SharedServicesModule.Task>();
+        private List<SharedServicesModule.Task> _listTasks = new List<SharedServicesModule.Task>();
         public List<SharedServicesModule.Task> ListTasks
         {
-            get { return _ListTasks; }
+            get { return _listTasks; }
             set
             {
-                _ListTasks = value;
+                _listTasks = value;
                 OnPropertyChanged();
             }
         }
 
-        private List<SharedServicesModule.Task> _ListUserTask = new List<SharedServicesModule.Task>();
+        private List<SharedServicesModule.Task> _listUserTask = new List<SharedServicesModule.Task>();
         public List<SharedServicesModule.Task> ListUserTask
         {
-            get { return _ListUserTask; }
+            get { return _listUserTask; }
             set
             {
-                _ListUserTask = value;
+                _listUserTask = value;
                 OnPropertyChanged();
             }
         }
         
 
-        private List<User> _ListMembers = new List<User>();
+        private List<User> _listMembers = new List<User>();
         public List<User> ListMembers
         {
-            get { return _ListMembers; }
+            get { return _listMembers; }
             set
             {
-                _ListMembers = value;
+                _listMembers = value;
                 OnPropertyChanged();
             }
         }
 
-        private List<User> _ListNewDevelopers = new List<User>();
+        private List<User> _listNewDevelopers = new List<User>();
         public List<User> ListNewDevelopers
         {
-            get { return _ListNewDevelopers; }
+            get { return _listNewDevelopers; }
             set
             {
-                _ListNewDevelopers = value;
+                _listNewDevelopers = value;
                 OnPropertyChanged();
             }
         }
 
-        private List<User> _NewMembersSourse = new List<User>();
+        private List<User> _newMembersSourse = new List<User>();
         public List<User> NewMembersSourse
         {
-            get { return _NewMembersSourse; }
+            get { return _newMembersSourse; }
             set
             {
-                _NewMembersSourse = value;
+                _newMembersSourse = value;
                 OnPropertyChanged();
             }
         }
 
-        private List<Role> _RoleSourse = new List<Role>();
+        private List<Role> _roleSourse = new List<Role>();
         public List<Role> RoleSourse
         {
-            get { return _RoleSourse; }
+            get { return _roleSourse; }
             set
             {
-                _RoleSourse = value;
+                _roleSourse = value;
                 OnPropertyChanged();
             }
         }
         
 
-        private User _SelectedMember;
+        private User _selectedMember;
         public User SelectedMember
         {
-            get { return _SelectedMember; }
+            get { return _selectedMember; }
             set
             {
-                _SelectedMember = value;
+                _selectedMember = value;
                 OnPropertyChanged();
             }
         }
 
-        private User _SelectedNewMember;
+        private User _selectedNewMember;
         public User SelectedNewMember
         {
-            get { return _SelectedNewMember; }
+            get { return _selectedNewMember; }
             set
             {
-                _SelectedNewMember = value;
+                _selectedNewMember = value;
                 OnPropertyChanged();
             }
         }
 
-        private Role _SelectedRole;
+        private Role _selectedRole;
         public Role SelectedRole
         {
-            get { return _SelectedRole; }
+            get { return _selectedRole; }
             set
             {
-                _SelectedRole = value;
+                _selectedRole = value;
                 OnPropertyChanged();
             }
         }
 
 
-        private Role _SelectedChangeRole;
+        private Role _selectedChangeRole;
         public Role SelectedChangeRole
         {
-            get { return _SelectedChangeRole; }
+            get { return _selectedChangeRole; }
             set
             {
-                _SelectedChangeRole = value;
+                _selectedChangeRole = value;
                 OnPropertyChanged();
             }
         }
         
 
-        private bool _ComboBoxNewMemberIsDropDownOpen;
+        private bool _comboBoxNewMemberIsDropDownOpen;
         public bool ComboBoxNewMemberIsDropDownOpen
         {
-            get { return _ComboBoxNewMemberIsDropDownOpen; }
+            get { return _comboBoxNewMemberIsDropDownOpen; }
             set
             {
-                _ComboBoxNewMemberIsDropDownOpen = value;
+                _comboBoxNewMemberIsDropDownOpen = value;
                 OnPropertyChanged();
             }
         }
         
 
-        private SharedServicesModule.Task _SelectedTask;
+        private SharedServicesModule.Task _selectedTask;
         public SharedServicesModule.Task SelectedTask
         {
-            get { return _SelectedTask; }
+            get { return _selectedTask; }
             set
             {
-                _SelectedTask = value;
+                _selectedTask = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _ComboBoxNewMembersText;
+        private string _comboBoxNewMembersText;
         public string ComboBoxNewMembersText
         {
-            get { return _ComboBoxNewMembersText; }
+            get { return _comboBoxNewMembersText; }
             set
             {
-                _ComboBoxNewMembersText = value;
+                _comboBoxNewMembersText = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _ComboBoxRoleText;
+        private string _comboBoxRoleText;
         public string ComboBoxRoleText
         {
-            get { return _ComboBoxRoleText; }
+            get { return _comboBoxRoleText; }
             set
             {
-                _ComboBoxRoleText = value;
+                _comboBoxRoleText = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _ComboBoxChangeRoleText;
+        private string _comboBoxChangeRoleText;
         public string ComboBoxChangeRoleText
         {
-            get { return _ComboBoxChangeRoleText; }
+            get { return _comboBoxChangeRoleText; }
             set
             {
-                _ComboBoxChangeRoleText = value;
+                _comboBoxChangeRoleText = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _ProjectDescription;
+        private string _projectDescription;
         public string ProjectDescription
         {
-            get { return _ProjectDescription; }
+            get { return _projectDescription; }
             set
             {
-                _ProjectDescription = value;
+                _projectDescription = value;
                 OnPropertyChanged();
             }
         }
 
-        private Visibility _DeleteMemberButtonVisibility = Visibility.Collapsed;
+        private Visibility _deleteMemberButtonVisibility = Visibility.Collapsed;
         public Visibility DeleteMemberButtonVisibility
         {
-            get { return _DeleteMemberButtonVisibility; }
+            get { return _deleteMemberButtonVisibility; }
             set
             {
-                _DeleteMemberButtonVisibility = value;
+                _deleteMemberButtonVisibility = value;
                 OnPropertyChanged();
             }
         }
 
-        private Visibility _DeleteTaskButtonVisibility = Visibility.Collapsed;
+        private Visibility _deleteTaskButtonVisibility = Visibility.Collapsed;
         public Visibility DeleteTaskButtonVisibility
         {
-            get { return _DeleteTaskButtonVisibility; }
+            get { return _deleteTaskButtonVisibility; }
             set
             {
-                _DeleteTaskButtonVisibility = value;
+                _deleteTaskButtonVisibility = value;
                 OnPropertyChanged();
             }
         }
 
-        private Visibility _AddNewTaskButtonVisibility = Visibility.Collapsed;
+        private Visibility _addNewTaskButtonVisibility = Visibility.Collapsed;
         public Visibility AddNewTaskButtonVisibility
         {
-            get { return _AddNewTaskButtonVisibility; }
+            get { return _addNewTaskButtonVisibility; }
             set
             {
-                _AddNewTaskButtonVisibility = value;
+                _addNewTaskButtonVisibility = value;
                 OnPropertyChanged();
             }
         }
 
-        private Visibility _ChangeTaskButtonVisibility = Visibility.Collapsed;
+        private Visibility _changeTaskButtonVisibility = Visibility.Collapsed;
         public Visibility ChangeTaskButtonVisibility
         {
-            get { return _ChangeTaskButtonVisibility; }
+            get { return _changeTaskButtonVisibility; }
             set
             {
-                _ChangeTaskButtonVisibility = value;
+                _changeTaskButtonVisibility = value;
                 OnPropertyChanged();
             }
         }
         
-
-
-
-        private Visibility _MemberInfo = Visibility.Collapsed;
+        private Visibility _memberInfo = Visibility.Collapsed;
         public Visibility MemberInfo
         {
-            get { return _MemberInfo; }
+            get { return _memberInfo; }
             set
             {
-                _MemberInfo = value;
+                _memberInfo = value;
                 OnPropertyChanged();
             }
         }
 
-        private Visibility _TaskInfo = Visibility.Collapsed;
+        private Visibility _taskInfo = Visibility.Collapsed;
         public Visibility TaskInfo
         {
-            get { return _TaskInfo; }
+            get { return _taskInfo; }
             set
             {
-                _TaskInfo = value;
+                _taskInfo = value;
                 OnPropertyChanged();
             }
         }
 
         
 
-        private Visibility _DeleteProjectVisibility = Visibility.Collapsed;
+        private Visibility _deleteProjectVisibility = Visibility.Collapsed;
         public Visibility DeleteProjectVisibility
         {
-            get { return _DeleteProjectVisibility; }
+            get { return _deleteProjectVisibility; }
             set
             {
-                _DeleteProjectVisibility = value;
+                _deleteProjectVisibility = value;
                 OnPropertyChanged();
             }
         }
         
 
-        private Visibility _VisibilityMembers = Visibility.Collapsed;
+        private Visibility _visibilityMembers = Visibility.Collapsed;
         public Visibility VisibilityMembers
         {
-            get { return _VisibilityMembers; }
+            get { return _visibilityMembers; }
             set
             {
-                _VisibilityMembers = value;
+                _visibilityMembers = value;
                 OnPropertyChanged();
             }
         }
 
-        private Visibility _AddNewMembersButtonVisibility = Visibility.Collapsed;
+        private Visibility _addNewMembersButtonVisibility = Visibility.Collapsed;
         public Visibility AddNewMembersButtonVisibility
         {
-            get { return _AddNewMembersButtonVisibility; }
+            get { return _addNewMembersButtonVisibility; }
             set
             {
-                _AddNewMembersButtonVisibility = value;
+                _addNewMembersButtonVisibility = value;
                 OnPropertyChanged();
             }
         }
 
-        private Visibility _ChangeRoleVisibility = Visibility.Collapsed;
+        private Visibility _changeRoleVisibility = Visibility.Collapsed;
         public Visibility ChangeRoleVisibility
         {
-            get { return _ChangeRoleVisibility; }
+            get { return _changeRoleVisibility; }
             set
             {
-                _ChangeRoleVisibility = value;
+                _changeRoleVisibility = value;
                 OnPropertyChanged();
             }
         }
         
-
-        private string _ListTasksText;
+        private string _listTasksText;
         public string ListTasksText
         {
-            get { return _ListTasksText; }
+            get { return _listTasksText; }
             set
             {
-                _ListTasksText = value;
+                _listTasksText = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _TaskEndDate;
+        private string _taskEndDate;
         public string TaskEndDate
         {
-            get { return _TaskEndDate; }
+            get { return _taskEndDate; }
             set
             {
-                _TaskEndDate = value;
+                _taskEndDate = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _TaskBeginDate;
+        private string _taskBeginDate;
         public string TaskBeginDate
         {
-            get { return _TaskBeginDate; }
+            get { return _taskBeginDate; }
             set
             {
-                _TaskBeginDate = value;
+                _taskBeginDate = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _UserNameSelectedTask;
+        private string _userNameSelectedTask;
         public string UserNameSelectedTask
         {
-            get { return _UserNameSelectedTask; }
+            get { return _userNameSelectedTask; }
             set
             {
-                _UserNameSelectedTask = value;
+                _userNameSelectedTask = value;
                 OnPropertyChanged();
             }
         }
         
+        private TextDecorationCollection _underline;
+        public TextDecorationCollection Underline
+        {
+            get { return _underline; }
+            set
+            {
+                _underline = value;
+                OnPropertyChanged();
+            }
+        }
 
+        #endregion
 
+        #region Methods
 
         public async System.Threading.Tasks.Task RefreshUsers()
         {
@@ -401,7 +408,7 @@ namespace BusinessLogicModule
             List<User> users = (await _dbRepository.GetUsers());
             List<User> usersInProject = (await _dbRepository.GetUsersFromProject(projectId));
             int number = 0;
-            int CountUsersInProject = usersInProject.Count;
+            int countUsersInProject = usersInProject.Count;
             foreach (User user in users)
             {
                 number = 0;
@@ -412,7 +419,7 @@ namespace BusinessLogicModule
                         number++;
                     }
                 }
-                if (number == CountUsersInProject)
+                if (number == countUsersInProject)
                 {
                     userInOtherProject.Add(user);
                 }
@@ -435,24 +442,22 @@ namespace BusinessLogicModule
                         List<User> users = (await _dbRepository.GetUsers());
                         List<User> usersInProject = (await _dbRepository.GetUsersFromProject(projectId));
                         int number = 0;
-                        int CountUsersInProject = usersInProject.Count;
-                        foreach (User user1 in users)
+                        int countUsersInProject = usersInProject.Count;
+                        foreach (User user in users)
                         {
                             number = 0;
                             foreach (User userProject1 in usersInProject)
                             {
-                                if (!string.Equals(user1.Login, userProject1.Login))
+                                if (!string.Equals(user.Login, userProject1.Login))
                                 {
                                     number++;
                                 }
                             }
-                            if (number == CountUsersInProject)
+                            if (number == countUsersInProject)
                             {
-                                userInOtherProject.Add(user1);
+                                userInOtherProject.Add(user);
                             }
                         }
-
-                        
                         ComboBoxNewMemberIsDropDownOpen = true;
                         NewMembersSourse = userInOtherProject.Where(p => p.Login.Contains(ComboBoxNewMembersText)).ToList();
                     }
@@ -503,10 +508,8 @@ namespace BusinessLogicModule
                             Project project = await _dbRepository.GetProject(projectId);
                             User user = await _dbRepository.GetUser(SelectedMember.Login);
                             int adminId = (await _dbRepository.GetUser(SelectedMember.Login)).Id;
-
-
-                            List<Permission> permissions = await _dbRepository.GetPermissionsFromRole((await _dbRepository.GetRoleFromUser(userName, projectId)).Id);//(await DBRepository.GetRoleFromUser(userName, projectId)).Permission.ToList();
-
+                            
+                            List<Permission> permissions = await _dbRepository.GetPermissionsFromRole((await _dbRepository.GetRoleFromUser(userName, projectId)).Id);
                             DeleteMemberButtonVisibility = (project.AdminId == adminId ? Visibility.Collapsed :
                                                             permissions.Where(c => string.Equals(c.Name, "DeleteMembers")).ToList().Count == 0 ? Visibility.Collapsed : Visibility.Visible);
                             ChangeRoleVisibility = (project.AdminId == adminId ? Visibility.Collapsed :
@@ -691,7 +694,7 @@ namespace BusinessLogicModule
                         List<User> users = (await _dbRepository.GetUsers());
                         List<User> usersInProject = (await _dbRepository.GetUsersFromProject(projectId));
                         int number = 0;
-                        int CountUsersInProject = usersInProject.Count;
+                        int countUsersInProject = usersInProject.Count;
                         foreach (User user in users)
                         {
                             number = 0;
@@ -702,7 +705,7 @@ namespace BusinessLogicModule
                                     number++;
                                 }
                             }
-                            if (number == CountUsersInProject) userInOtherProject.Add(user);
+                            if (number == countUsersInProject) userInOtherProject.Add(user);
                         }
                         NewMembersSourse = userInOtherProject;
                         ListMembers = await _dbRepository.GetUsersFromProject(projectId);
@@ -788,18 +791,6 @@ namespace BusinessLogicModule
             }
         }
 
-        private TextDecorationCollection _Underline;
-        public TextDecorationCollection Underline
-        {
-            get { return _Underline; }
-            set
-            {
-                _Underline = value;
-                OnPropertyChanged();
-            }
-        }
-        
-
         public ICommand UnderlineOn
         {
             get
@@ -865,5 +856,6 @@ namespace BusinessLogicModule
             }
         }
 
+        #endregion
     }
 }

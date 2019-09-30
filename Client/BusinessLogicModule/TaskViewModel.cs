@@ -11,75 +11,74 @@ namespace BusinessLogicModule
     public class TaskViewModel : NavigateViewModel
     {
         IRepository _dbRepository = new DBRepository();
-
-
+        
         public TaskViewModel()
         {
             Title = "Task";
         }
 
-        private string _TaskName;
+        private string _taskName;
         public string TaskName
         {
-            get { return _TaskName; }
+            get { return _taskName; }
             set
             {
-                _TaskName = value;
+                _taskName = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _UserName;
+        private string _userName;
         public string UserName
         {
-            get { return _UserName; }
+            get { return _userName; }
             set
             {
-                _UserName = value;
+                _userName = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _TaskFinishDate;
+        private string _taskFinishDate;
         public string TaskFinishDate
         {
-            get { return _TaskFinishDate; }
+            get { return _taskFinishDate; }
             set
             {
-                _TaskFinishDate = value;
+                _taskFinishDate = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _TaskDescriprion;
+        private string _taskDescriprion;
         public string TaskDescriprion
         {
-            get { return _TaskDescriprion; }
+            get { return _taskDescriprion; }
             set
             {
-                _TaskDescriprion = value;
+                _taskDescriprion = value;
                 OnPropertyChanged();
             }
         }
 
-        private Visibility _DeleteTaskVisibility = Visibility.Collapsed;
+        private Visibility _deleteTaskVisibility = Visibility.Collapsed;
         public Visibility DeleteTaskVisibility
         {
-            get { return _DeleteTaskVisibility; }
+            get { return _deleteTaskVisibility; }
             set
             {
-                _DeleteTaskVisibility = value;
+                _deleteTaskVisibility = value;
                 OnPropertyChanged();
             }
         }
 
-        private Visibility _ChangeTaskVisibility = Visibility.Collapsed;
+        private Visibility _changeTaskVisibility = Visibility.Collapsed;
         public Visibility ChangeTaskVisibility
         {
-            get { return _ChangeTaskVisibility; }
+            get { return _changeTaskVisibility; }
             set
             {
-                _ChangeTaskVisibility = value;
+                _changeTaskVisibility = value;
                 OnPropertyChanged();
             }
         }

@@ -77,7 +77,7 @@
     <Compile Include="API\Requests.cs" />
     <Compile Include="DBRepository.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="Literals.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="NavigateArgs.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

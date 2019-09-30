@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ServerAPI.Data
 {
@@ -14,7 +13,5 @@ namespace ServerAPI.Data
         
         public int RoleId { get; set; }
         public virtual Role Role { get; set; }
-
-
     }
 }

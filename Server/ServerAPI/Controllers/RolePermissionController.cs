@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ServerAPI.Data;
 using ServerAPI.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ServerAPI.Controllers
 {
-    [Route("api/rolepermissions")]
+    [Route("api/role-permissions")]
     [ApiController]
     public class RolePermissionController : ControllerBase
     {

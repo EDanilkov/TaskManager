@@ -2,6 +2,10 @@
 {
     public class RecordViewModel
     {
+        public RecordViewModel()
+        {
+        }
+
         public int Id { get; set; }
         public string ProjectName { get; set; }
         public string TaskName { get; set; }
@@ -17,8 +21,5 @@
             EndDate = endDate;
         }
 
-        public RecordViewModel()
-        {
-        }
     }
 }

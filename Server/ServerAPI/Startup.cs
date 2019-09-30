@@ -8,8 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using ServerAPI.Authorization;
 using ServerAPI.Data;
-using ServerAPI.Models;
-using System.Collections.Generic;
 
 namespace ServerAPI
 {

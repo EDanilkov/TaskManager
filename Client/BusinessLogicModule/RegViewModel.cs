@@ -1,14 +1,7 @@
-﻿using BusinessLogicModule.API;
-using BusinessLogicModule.ViewModel;
-using Newtonsoft.Json;
+﻿using BusinessLogicModule.ViewModel;
 using SharedServicesModule;
-using SharedServicesModule.ResponseModel;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,47 +13,47 @@ namespace BusinessLogicModule
     {
         IRepository _dbRepository = new DBRepository();
 
-        private string _Login;
+        private string _login;
         public string Login
         {
-            get { return _Login; }
+            get { return _login; }
             set
             {
-                _Login = value;
+                _login = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _TextError;
+        private string _textError;
         public string TextError
         {
-            get { return _TextError; }
+            get { return _textError; }
             set
             {
-                _TextError = value;
+                _textError = value;
                 OnPropertyChanged();
             }
         }
 
-        private Brush _ColorError;
+        private Brush _colorError;
         public Brush ColorError
         {
-            get { return _ColorError; }
+            get { return _colorError; }
             set
             {
-                _ColorError = value;
+                _colorError = value;
                 OnPropertyChanged();
             }
         }
 
 
-        private Visibility _VisibilityError = Visibility.Hidden;
+        private Visibility _visibilityError = Visibility.Hidden;
         public Visibility VisibilityError
         {
-            get { return _VisibilityError; }
+            get { return _visibilityError; }
             set
             {
-                _VisibilityError = value;
+                _visibilityError = value;
                 OnPropertyChanged();
             }
         }
@@ -70,16 +63,6 @@ namespace BusinessLogicModule
             TextError = textError;
             ColorError = (Brush)new BrushConverter().ConvertFrom(colorError);
             VisibilityError = Visibility.Visible;
-        }
-
-        public ICommand Loaded
-        {
-            get
-            {
-                return new DelegateCommand((obj) =>
-                {
-                });
-            }
         }
 
         public ICommand Enter
@@ -125,17 +108,17 @@ namespace BusinessLogicModule
                             {
                                 User user = new User() { Login = Login, Password = password, RegistrationDate = DateTime.Now };
                                 await _dbRepository.AddUser(user);
-                                ShowError("Вы успешно зарегестрированы", Literals.Success);
+                                ShowError("Вы успешно зарегестрированы", Constants.Success);
                             }
                             else
                             {
-                                ShowError("Данный логин уже существует", Literals.Error);
+                                ShowError("Данный логин уже существует", Constants.Error);
                             }
                             
                         }
                         else
                         {
-                            ShowError("Вы обязаны ввести все поля", Literals.Error);
+                            ShowError("Вы обязаны ввести все поля", Constants.Error);
                         }
                     }
                     catch (Exception ex)
