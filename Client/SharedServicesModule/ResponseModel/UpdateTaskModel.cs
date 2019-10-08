@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedServicesModule.Models;
+using System;
 
 namespace SharedServicesModule.ResponseModel
 {

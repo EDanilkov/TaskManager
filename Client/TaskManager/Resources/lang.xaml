@@ -1,30 +1,39 @@
-﻿<ResourceDictionary 
+﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:v="clr-namespace:System;assembly=mscorlib">
-    <v:String x:Key="m_menu_Language">Language</v:String>
+    <v:String x:Key="mMenuLanguage">LANGUAGE</v:String>
     <v:String x:Key="m_projects/">Projects/</v:String>
-    <v:String x:Key="m_login">Login</v:String>
-    <v:String x:Key="m_password">Password</v:String>
-    <v:String x:Key="m_enter">Enter</v:String>
+    <v:String x:Key="MNewProject">NEW PROJECT</v:String>
+    <v:String x:Key="MNewMember">NEW MEMBER</v:String>
+    <v:String x:Key="MNewTask">NEW TASK</v:String>
+    <v:String x:Key="MAccept">ACCEPT</v:String>
+    <v:String x:Key="MCancel">CANCEL</v:String>
+    <v:String x:Key="mLogin">Login</v:String>
+    <v:String x:Key="mPassword">Password</v:String>
+    <v:String x:Key="mEnter">Enter</v:String>
     <v:String x:Key="m_register">Register</v:String>
-    <v:String x:Key="m_add_new_project">Add new project</v:String>
-    <v:String x:Key="m_tasks">Tasks</v:String>
-    <v:String x:Key="m_description">Description</v:String>
-    <v:String x:Key="m_members">Members</v:String>
+    <v:String x:Key="mNewProject">New project</v:String>
+    <v:String x:Key="mPersonal">Personal</v:String>
+    <v:String x:Key="mFilterByName">Filter by name...</v:String>
+    <v:String x:Key="mNoPersonalProjects">This user doesn't have any personal projects</v:String>
+    <v:String x:Key="mProjects">PROJECTS</v:String>
+    <v:String x:Key="mTasks">Tasks</v:String>
+    <v:String x:Key="mDescription">Description</v:String>
+    <v:String x:Key="mMembers">Members</v:String>
     <v:String x:Key="m_change_task">Change Task</v:String>
-    <v:String x:Key="m_name">Name</v:String>
-    <v:String x:Key="m_for_user">For user</v:String>
-    <v:String x:Key="m_begin_date">Begin date</v:String>
-    <v:String x:Key="m_end_date">End date</v:String>
-    <v:String x:Key="m_change">Change</v:String>
-    <v:String x:Key="m_add">Add</v:String>
+    <v:String x:Key="mName">Name</v:String>
+    <v:String x:Key="mForUser">For user</v:String>
+    <v:String x:Key="mBeginDate">Begin date</v:String>
+    <v:String x:Key="mEndDate">End date</v:String>
+    <v:String x:Key="mChange">Change</v:String>
+    <v:String x:Key="mAdd">Add</v:String>
     <v:String x:Key="m_add_new_task">Add new task</v:String>
-    <v:String x:Key="m_delete">Delete</v:String>
-    <v:String x:Key="m_role">Role: </v:String>
-    <v:String x:Key="m_user">User:</v:String>
-    <v:String x:Key="m_my_account">MY ACCOUNT</v:String>
-    <v:String x:Key="m_projects">PROJECTS</v:String>
+    <v:String x:Key="mDelete">Delete</v:String>
+    <v:String x:Key="mRole">Role: </v:String>
+    <v:String x:Key="mUser">User:</v:String>
+    <v:String x:Key="mProfile">MY ACCOUNT</v:String>
+    <v:String x:Key="mTitle">Projects</v:String>
     <v:String x:Key="m_member_dont_have_tasks">This member don't have tasks</v:String>
     <v:String x:Key="m_select_role">Please choose a role</v:String>
     <v:String x:Key="m_delete_all_task">Do you want to delete all jobs for this worker?</v:String>
@@ -42,5 +51,9 @@
     <v:String x:Key="m_error_delete_member">Error delete user !</v:String>
     <v:String x:Key="m_error_change_role">Error change role !</v:String>
     <v:String x:Key="m_error_enter">Login failed !</v:String>
+    <v:String x:Key="m_error_enter_all_fields">You should enter all fields</v:String>
+    <v:String x:Key="m_error_bad_signup">Invalid Login or password</v:String>
+    <v:String x:Key="m_error_bad_login">This login already exists</v:String>
+    <v:String x:Key="m_success_registered">Successfully registered</v:String>
 
 </ResourceDictionary>

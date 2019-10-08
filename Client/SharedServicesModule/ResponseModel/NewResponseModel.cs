@@ -1,4 +1,4 @@
-﻿namespace SharedServicesModule
+﻿namespace SharedServicesModule.ResponseModel
 {
     public class NewResponseModel
     {

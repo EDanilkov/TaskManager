@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="UIModule.Pages.AddNewMember"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition 
+                Width="220"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition 
+                Height="70*"/>
+            <RowDefinition 
+                Height="30*"/>
+        </Grid.RowDefinitions>
+        <StackPanel
+            Grid.Column="0"
+            Grid.Row="0"
+            Style="{DynamicResource VerticalStackPanel}">
+            <TextBlock
+                Style="{DynamicResource TitleAddNew}"
+                Text="{DynamicResource MNewMember}"/>
+            <ComboBox
+                Grid.Column="1"
+                DisplayMemberPath="Login"
+                materialDesign:HintAssist.Hint="{DynamicResource mName}"
+                Style="{DynamicResource Members}"
+                IsDropDownOpen ="{Binding ComboBoxNewMemberIsDropDownOpen}"
+                Text="{Binding ComboBoxNewMembersText}"
+                SelectedValue="{Binding SelectedNewMember}"
+                ItemsSource="{Binding NewMembersSourse}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewTextInput">
+                        <i:InvokeCommandAction Command="{Binding ComboBoxNewMembersChanged}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <ComboBox 
+                Grid.Column="1"
+                Margin="10 10 10 20"
+                DisplayMemberPath="Name"
+                materialDesign:HintAssist.Hint="{DynamicResource mRole}"
+                Style="{DynamicResource Roles}"
+                SelectedValue="{Binding SelectedRole}"
+                ItemsSource="{Binding RoleSourse}">
+            </ComboBox>
+        </StackPanel>
+        <Grid
+            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition 
+                    Width="*"/>
+                <ColumnDefinition 
+                    Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Style="{DynamicResource Accept}"
+                Command="{Binding Accept}"
+                Content="{DynamicResource MAccept}"/>
+            <Button
+                Grid.Column="1"
+                Style="{DynamicResource Cancel}"
+                Command="materialDesign:DialogHost.CloseDialogCommand"
+                Content="{DynamicResource MCancel}"/>
+        </Grid>
+    </Grid>
+</UserControl>

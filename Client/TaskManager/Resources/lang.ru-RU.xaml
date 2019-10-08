@@ -1,30 +1,39 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:v="clr-namespace:System;assembly=mscorlib">
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
     <!-- Main window -->
-    <v:String x:Key="m_menu_Language">Язык</v:String>
+    <v:String x:Key="mMenuLanguage">ЯЗЫК</v:String>
     <v:String x:Key="m_projects/">Проекты/</v:String>
-    <v:String x:Key="m_login">Логин</v:String>
-    <v:String x:Key="m_password">Пароль</v:String>
-    <v:String x:Key="m_enter">Войти</v:String>
+    <v:String x:Key="MNewProject">НОВЫЙ ПРОЕКТ</v:String>
+    <v:String x:Key="MNewMember">НОВЫЙ ПОЛЬЗОВАТЕЛЬ</v:String>
+    <v:String x:Key="MNewTask">НОВОЕ ЗАДАНИЕ</v:String>
+    <v:String x:Key="MAccept">ПРИНЯТЬ</v:String>
+    <v:String x:Key="MCancel">ОТМЕНА</v:String>
+    <v:String x:Key="mLogin">Логин</v:String>
+    <v:String x:Key="mPassword">Пароль</v:String>
+    <v:String x:Key="mEnter">Войти</v:String>
     <v:String x:Key="m_register">Зарегистрироваться</v:String>
-    <v:String x:Key="m_add_new_project">Добавить новый проект</v:String>
-    <v:String x:Key="m_tasks">Задачи</v:String>
-    <v:String x:Key="m_description">Описание</v:String>
-    <v:String x:Key="m_members">Участники</v:String>
+    <v:String x:Key="mNewProject">Новый проект</v:String>
+    <v:String x:Key="mPersonal">Личные</v:String>
+    <v:String x:Key="mFilterByName">Фильтр по имени...</v:String>
+    <v:String x:Key="mNoPersonalProjects">У этого пользователя нет никаких личных проектов</v:String>
+    <v:String x:Key="mProjects">ПРОЕКТЫ</v:String>
+    <v:String x:Key="mTasks">Задачи</v:String>
+    <v:String x:Key="mDescription">Описание</v:String>
+    <v:String x:Key="mMembers">Участники</v:String>
     <v:String x:Key="m_change_task">Изменение задачи</v:String>
-    <v:String x:Key="m_name">Имя</v:String>
-    <v:String x:Key="m_for_user">Для пользователя</v:String>
-    <v:String x:Key="m_begin_date">Дата выдачи</v:String>
-    <v:String x:Key="m_end_date">Дата окончания</v:String>
-    <v:String x:Key="m_change">Изменить</v:String>
-    <v:String x:Key="m_add">Добавить</v:String>
+    <v:String x:Key="mName">Имя</v:String>
+    <v:String x:Key="mForUser">Для пользователя</v:String>
+    <v:String x:Key="mBeginDate">Дата выдачи</v:String>
+    <v:String x:Key="mEndDate">Дата окончания</v:String>
+    <v:String x:Key="mChange">Изменить</v:String>
+    <v:String x:Key="mAdd">Добавить</v:String>
     <v:String x:Key="m_add_new_task">Добавить новую задачу</v:String>
-    <v:String x:Key="m_delete">Удалить</v:String>
-    <v:String x:Key="m_role">Роль: </v:String>
-    <v:String x:Key="m_user">Пользователь: </v:String>
-    <v:String x:Key="m_my_account">МОЙ АККАУНТ</v:String>
-    <v:String x:Key="m_projects">ПРОЕКТЫ</v:String>
+    <v:String x:Key="mDelete">Удалить</v:String>
+    <v:String x:Key="mRole">Роль: </v:String>
+    <v:String x:Key="mUser">Пользователь: </v:String>
+    <v:String x:Key="mProfile">МОЙ АККАУНТ</v:String>
+    <v:String x:Key="mTitle">Проекты</v:String>
     <v:String x:Key="m_member_dont_have_tasks">У этого пользователя нету текущих задач</v:String>
     <v:String x:Key="m_select_role">Пожалуйста выберите роль</v:String>
     <v:String x:Key="m_delete_all_task">Удалить все задания этого работника?</v:String>
@@ -42,6 +51,11 @@
     <v:String x:Key="m_error_delete_member">Ошибка удаления пользователя !</v:String>
     <v:String x:Key="m_error_change_role">Ошибка изменения роли !</v:String>
     <v:String x:Key="m_error_enter">Ошибка входа !</v:String>
+    <v:String x:Key="m_error_enter_all_fields">Вы обязаны ввести все поля</v:String>
+    <v:String x:Key="m_error_bad_signup">Неправильное имя пользователя или пароль</v:String>
+    <v:String x:Key="m_error_bad_login">Данный логин уже существует</v:String>
+    <v:String x:Key="m_success_registered">Успешно зарегистрированы</v:String>
+    
 
 
 </ResourceDictionary>

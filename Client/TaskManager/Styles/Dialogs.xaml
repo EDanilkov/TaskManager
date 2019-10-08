@@ -1,0 +1,70 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <materialDesign:DialogHost
+        x:Key="AddProjectDialog"
+        CloseOnClickAway="True">
+        <materialDesign:DialogHost.DialogContent >
+            <Grid Margin="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition 
+                        Width="180"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition 
+                        Height="70*"/>
+                    <RowDefinition 
+                        Height="30*"/>
+                </Grid.RowDefinitions>
+                <StackPanel
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Orientation="Vertical">
+                    <TextBlock
+                        Foreground="#5866B8"
+                        HorizontalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="NEW PROJECT"/>
+                    <TextBox
+                        Text="{Binding ProjectName}"
+                        materialDesign:HintAssist.Hint="Name"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        MaxHeight="100"
+                        TextWrapping="Wrap"
+                        Margin="5"/>
+                    <TextBox
+                        Text="{Binding ProjectDescription}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Description"
+                        MaxHeight="100"
+                        TextWrapping="Wrap"
+                        Margin="5"/>
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+                    <Button
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding Add}"
+                        IsDefault="True"
+                        Margin="5"
+                        Content="ACCEPT"/>
+                    <Button
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        IsCancel="True"
+                        Margin="5"
+                        Command="materialDesign:DialogHost.CloseDialogCommand"
+                        Content="CANCEL"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:DialogHost.DialogContent>
+    </materialDesign:DialogHost>
+
+</ResourceDictionary>

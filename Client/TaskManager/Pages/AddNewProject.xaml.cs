@@ -5,7 +5,7 @@ namespace UIModule.Pages
     /// <summary>
     /// Interaction logic for AddNewProject.xaml
     /// </summary>
-    public partial class AddNewProject : Page
+    public partial class AddNewProject : UserControl
     {
         public AddNewProject()
         {

@@ -28,6 +28,8 @@ namespace BusinessLogicModule.Properties {
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
+        private static string token;
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
@@ -77,16 +79,22 @@ namespace BusinessLogicModule.Properties {
                 return ResourceManager.GetString("TaskId", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string Token {
-            get {
-                return ResourceManager.GetString("Token", resourceCulture);
+        internal static string Token
+        {
+            get
+            {
+                return token;
+            }
+            set
+            {
+                token = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>

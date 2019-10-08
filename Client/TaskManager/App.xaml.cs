@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogicModule.Services;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -6,6 +7,8 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using UIModule.ViewModels;
+using UIModule.Views;
 
 namespace UIModule
 {
@@ -24,8 +27,14 @@ namespace UIModule
             }
         }
 
+        public DisplayRootRegistry displayRootRegistry = new DisplayRootRegistry();        
+
         public App()
         {
+            //УДАЛИТЬ
+            displayRootRegistry.RegisterWindowType<AuthorizationWindowViewModel, AuthorizationWindow>();
+            displayRootRegistry.RegisterWindowType<MainWindowViewModel, MainWindow>();
+
             InitializeComponent();
             App.LanguageChanged += App_LanguageChanged;
 

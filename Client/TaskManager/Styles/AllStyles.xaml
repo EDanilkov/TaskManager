@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+
+        <ResourceDictionary Source="ButtonStyles.xaml" />
+        <ResourceDictionary Source="StackPanelStyles.xaml" />
+        <ResourceDictionary Source="TextBlockStyles.xaml" />
+        <ResourceDictionary Source="PackIconStyles.xaml" />
+        <ResourceDictionary Source="ListBoxStyles.xaml" />
+        <ResourceDictionary Source="FigureStyles.xaml" />
+        <ResourceDictionary Source="LabelStyles.xaml" />
+        <ResourceDictionary Source="TextBoxStyles.xaml" />
+        <ResourceDictionary Source="ImageStyles.xaml" />
+        <ResourceDictionary Source="GridStyles.xaml" />
+        <ResourceDictionary Source="TabControlStyles.xaml" />
+        <ResourceDictionary Source="ComboBoxStyles.xaml" />
+        <ResourceDictionary Source="Dialogs.xaml" />
+
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

@@ -1,30 +1,22 @@
 ﻿<Page x:Class="UIModule.Pages.Projects"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
-      xmlns:local="clr-namespace:UIModule.Pages"
-      xmlns:vm="clr-namespace:BusinessLogicModule;assembly=BusinessLogicModule"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:vm="clr-namespace:UIModule.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1080"
+      d:DesignHeight="600" 
+      d:DesignWidth="1080"
       Title="Projects">
 
-    <Page.Resources>
-        <Style x:Key="Title">
-            <Setter Property="Control.FontSize" Value="25" />
-            <Setter Property="Control.VerticalAlignment" Value="Center" />
-            <Setter Property="Control.Foreground"  Value="Blue" />
-            <Setter Property="Control.FontWeight" Value="Bold"/>
-            <Setter Property="Control.Margin" Value="5"/>
-        </Style>
-    </Page.Resources>
-    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="SizeChanged">
+            <i:InvokeCommandAction Command="{Binding SizeChanged}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -32,88 +24,138 @@
         <vm:ProjectsViewModel/>
     </Page.DataContext>
 
-    <Grid
-        Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition
-            Width="50"/>
-            <ColumnDefinition 
-            Width="*"/>
-            <ColumnDefinition 
-            Width="50"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition 
-                MinHeight="40"
-                Height="80*"/>
-            <RowDefinition 
-                MinHeight="80"
-                Height="500*"/>
-            <RowDefinition 
-                Height="100*"/>
-        </Grid.RowDefinitions>
-        <StackPanel 
-            Margin="10"
-            MinHeight="40"
+
+    <materialDesign:DialogHost
+        Identifier="RootDialog"
+        CloseOnClickAway="True">
+        <Grid
+            Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="50"/>
+                <ColumnDefinition 
+                    Width="*"/>
+                <ColumnDefinition 
+                    Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition 
+                    MinHeight="60"/>
+                <RowDefinition 
+                    MinHeight="80"
+                    Height="500*"/>
+                <RowDefinition 
+                    Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid
+                Grid.Row="0"
+                Grid.Column="1">
+                <StackPanel 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Style="{DynamicResource TitleHorizontalStackPanel}">
+                    <TextBlock 
+                        Style="{DynamicResource TitleName}"
+                        Text="{DynamicResource mTitle}"/>
+                </StackPanel>
+                <StackPanel
+                    Style="{DynamicResource RightHorizontalStackPanel}">
+                    <Button
+                        Style="{DynamicResource Button}"
+                        Command="{Binding NewProjectClick}"
+                        Content="{DynamicResource mNewProject}">
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+        <Separator 
             Grid.Row="0"
             Grid.Column="1"
-            Orientation="Vertical"
-            VerticalAlignment="Center">
-            <TextBlock 
-                Text="{DynamicResource m_projects}"
-                Style="{StaticResource Title}"/>
-        </StackPanel>
-        <Separator 
-            Grid.ColumnSpan="3" 
             VerticalAlignment="Bottom"/>
+
         <StackPanel 
             Grid.Row="1"
             Grid.Column="1"
-            Orientation="Vertical" >
-            <StackPanel>
-                
+            Orientation="Vertical">
+            <Grid
+                MinHeight="40">
                 <StackPanel
-                Orientation="Horizontal">
-                    <Button
-                    Margin="10"
-                    VerticalAlignment="Top"
-                    Command="{Binding AddNewProjectClick}">
-                        <TextBlock 
-                        Text="{DynamicResource m_add_new_project}"/>
-                    </Button>
+                    Style="{DynamicResource HorizontalStackPanel}">
+                    <TextBlock 
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                        Text="{DynamicResource mPersonal}"/>
+                    <ToggleButton
+                        IsChecked="{Binding Personal}"
+                        Style="{StaticResource MaterialDesignSwitchToggleButton}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Unchecked">
+                                <i:InvokeCommandAction Command="{Binding PersonalUnChecked}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding PersonalChecked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ToggleButton>
+                </StackPanel>
+                <StackPanel
+                    Style="{DynamicResource RightHorizontalStackPanel}">
+                    <TextBox
+                        Text="{Binding Path=Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:HintAssist.Hint="{DynamicResource mFilterByName}"
+                        MinWidth="200"
+                        VerticalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding FilterChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </StackPanel>
+            </Grid>
+
+            <Separator 
+                Grid.Row="0"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"/>
+
+                <StackPanel
+                Grid.Column="1"
+                Grid.Row="1"
+                Style="{DynamicResource TitleStackPanel}">
+                    <StackPanel
+                    Margin="20"
+                    Visibility="{Binding NotProjectsVisibility}"
+                    Orientation="Vertical">
+                        <materialDesign:PackIcon 
+                        Style="{DynamicResource CodeNotEqualVariant}" />
+                        <TextBlock
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                        Text="{DynamicResource mNoPersonalProjects}"/>
+                    </StackPanel>
+
+                    <ScrollViewer 
+                        VerticalScrollBarVisibility="Auto">
+                        <ListBox 
+                            BorderThickness="0"
+                            MaxHeight="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Visibility="{Binding ProjectsVisibility}"
+                            HorizontalContentAlignment="Stretch"
+                            ItemContainerStyle="{DynamicResource ListProjects}"
+                            ItemsSource="{Binding ListProjects}" 
+                            SelectedValue="{Binding SelectedProject}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectionChanged}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
+                    </ScrollViewer>
                 </StackPanel>
             </StackPanel>
-            <StackPanel
-                Background="#8C9EFF">
-                <ListBox 
-                ItemsSource="{Binding ListProjects}" 
-                SelectedValue="{Binding SelectedProject}" 
-                Background="#8C9EFF">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding SelectionChanged}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="50"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                Foreground="White"
-                                Grid.Column="0"
-                                Text="{Binding Name}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-
-                </ListBox>
-            </StackPanel>
-            
-        </StackPanel>
     </Grid>
 
+    </materialDesign:DialogHost>
 </Page>

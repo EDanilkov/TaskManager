@@ -12,7 +12,7 @@ using System.Security.Claims;
 
 namespace ServerAPI.Controllers
 {
-    [Route("api/accountes")]
+    [Route("api/accounts")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -45,8 +45,8 @@ namespace ServerAPI.Controllers
 
                 var response = new
                 {
-                    access_token = encodedJwt,
-                    username = identity.Name
+                    AccessToken = encodedJwt,
+                    UserName = identity.Name
                 };
 
                 Response.ContentType = "application/json";

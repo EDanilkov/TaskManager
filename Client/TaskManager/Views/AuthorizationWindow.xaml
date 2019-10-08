@@ -1,0 +1,68 @@
+﻿<Window x:Class="UIModule.Views.AuthorizationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:vm="clr-namespace:UIModule.ViewModels"
+        mc:Ignorable="d"
+        Title="Login" 
+        Height="500" 
+        Width="350" 
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        FontFamily="Segoe UI Emoji">
+
+    <Window.DataContext>
+        <vm:AuthorizationWindowViewModel/>
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Rectangle Style="{DynamicResource Rectangle}"/>
+        <Rectangle Style="{DynamicResource CenterRectangle}"/>
+
+        <Grid 
+            Style="{DynamicResource Authorization}">
+            <Label 
+                Content="LOGIN" 
+                Style="{DynamicResource Login}"/>
+            <StackPanel
+                Style="{DynamicResource LoginStackPanel}">
+                <TextBlock 
+                    Style="{DynamicResource Error}"
+                    Text="{Binding TextError}"
+                    Foreground="{Binding ColorError}"
+                    Visibility="{Binding VisibilityError}"/>
+                <TextBox 
+                    x:Name="Login"
+                    Text="{Binding Login}" 
+                    Style="{DynamicResource LoginTextBox}"
+                    materialDesign:HintAssist.Hint="{DynamicResource mLogin}" />
+                <PasswordBox 
+                    Name="Logpass"  
+                    Style="{DynamicResource PasswordTextBox}"
+                    materialDesign:HintAssist.Hint="{DynamicResource mPassword}"/>
+            </StackPanel>
+        </Grid>
+        <Button
+            Style="{DynamicResource Enter}"
+            Command="{Binding Enter}" 
+            CommandParameter="{Binding ElementName=Logpass}"
+            Content="{DynamicResource mEnter}"/>
+        <Button 
+            Style="{DynamicResource Register}"
+            Content="{DynamicResource m_register}" 
+            Command="{Binding Registration}"
+            CommandParameter="{Binding ElementName=Logpass}"/>
+        <materialDesign:PackIcon 
+            Style="{DynamicResource AccountIcon}"
+            Kind="AccountTie" />
+    </Grid>
+</Window>
