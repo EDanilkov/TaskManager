@@ -40,7 +40,7 @@
                 materialDesign:HintAssist.Hint="{DynamicResource mDescription}"/>
             <ComboBox 
                 materialDesign:HintAssist.Hint="{DynamicResource mForUser}"
-                DisplayMemberPath="{DynamicResource mLogin}"
+                DisplayMemberPath="Login"
                 SelectedValue="{Binding SelectedUser}"
                 ItemsSource="{Binding Users}"
                 Margin="5"/>

@@ -1,5 +1,6 @@
 ﻿using BusinessLogicModule.Interfaces;
 using BusinessLogicModule.Repositories;
+using NLog;
 using SharedServicesModule;
 using SharedServicesModule.Models;
 using SharedServicesModule.Services;
@@ -15,6 +16,7 @@ namespace UIModule.ViewModels
 {
     public class AuthorizationWindowViewModel : NavigateViewModel
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         public static Action CloseAction { get; set; }
         IUserRepository _userRepository;
         IRoleRepository _roleRepository;
@@ -131,6 +133,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         ShowError(Application.Current.Resources["m_error_download"].ToString(), Constants.Error);
                     }
                 });
@@ -176,6 +179,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         ShowError(Application.Current.Resources["m_error_enter"].ToString() + "\n" + ex.Message, Constants.Error);
                     }
                 });
@@ -204,7 +208,6 @@ namespace UIModule.ViewModels
                             {
                                 ShowError(Application.Current.Resources["m_error_bad_login"].ToString(), Constants.Error);
                             }
-
                         }
                         else
                         {
@@ -213,6 +216,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         ShowError(Application.Current.Resources["m_error_add_user"].ToString(), Constants.Error);
                     }
                 });

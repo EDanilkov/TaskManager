@@ -1,5 +1,6 @@
 ﻿using BusinessLogicModule.Interfaces;
 using BusinessLogicModule.Repositories;
+using NLog;
 using SharedServicesModule.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace UIModule.ViewModels
 {
     public class ProfileViewModel : NavigateViewModel
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         IProjectRepository _projectRepository;
 
@@ -91,11 +93,6 @@ namespace UIModule.ViewModels
                                 BeginDate = task.BeginDate.ToShortDateString(),
                                 EndDate = task.EndDate.ToShortDateString()
                             };
-                            /*record.Id = task.Id;
-                            record.ProjectName = project.Name;
-                            record.TaskName = task.Name;
-                            record.BeginDate = task.BeginDate.ToShortDateString();
-                            record.EndDate = task.EndDate.ToShortDateString();*/
                             records.Add(record);
                         }
                         ListRecords = records;
@@ -103,6 +100,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -126,6 +124,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });

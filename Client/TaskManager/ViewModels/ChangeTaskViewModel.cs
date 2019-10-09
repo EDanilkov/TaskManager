@@ -1,5 +1,6 @@
 ﻿using BusinessLogicModule.Interfaces;
 using BusinessLogicModule.Repositories;
+using NLog;
 using SharedServicesModule.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace UIModule.ViewModels
 {
     public class ChangeTaskViewModel : NavigateViewModel
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         ITaskRepository _taskRepository;
 
@@ -102,6 +104,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -127,6 +130,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_change_task"].ToString() + "\n" + ex.Message);
                     }
                 });

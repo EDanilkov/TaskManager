@@ -2,6 +2,7 @@
 using BusinessLogicModule.Repositories;
 using BusinessLogicModule.Services;
 using MaterialDesignThemes.Wpf;
+using NLog;
 using SharedServicesModule.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace UIModule.ViewModels
 {
     public class ProjectViewModel : NavigateViewModel
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         ITaskRepository _taskRepository;
         IProjectRepository _projectRepository;
@@ -425,6 +427,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -470,6 +473,7 @@ namespace UIModule.ViewModels
             }
             catch (Exception ex)
             {
+                logger.Debug(ex.ToString());
                 MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
             }
         }
@@ -506,6 +510,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -525,13 +530,11 @@ namespace UIModule.ViewModels
                             await _projectRepository.DeleteProject(int.Parse(System.Windows.Application.Current.Properties["ProjectId"].ToString()));
                             Navigate("Pages/Projects.xaml");
                         }
-                        else
-                        { 
-                        }
 
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_delete_project"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -583,6 +586,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_delete_member"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -607,6 +611,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -636,6 +641,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_change_role"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -655,6 +661,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString());
                     }
                 });
@@ -671,9 +678,10 @@ namespace UIModule.ViewModels
                     {
                         Underline = TextDecorations.Underline;
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        throw;
+
+                        logger.Debug(ex.ToString());
                     }
                 });
             }
@@ -683,7 +691,7 @@ namespace UIModule.ViewModels
         {
             get
             {
-                return new DelegateCommand((obj) =>
+                return new DelegateCommand((ex) =>
                 {
                     try
                     {
@@ -691,7 +699,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception e)
                     {
-                        throw;
+                        logger.Debug(e.ToString());
                     }
                 });
             }
@@ -709,7 +717,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception e)
                     {
-                        throw;
+                        logger.Debug(e.ToString());
                     }
                 });
             }

@@ -1,5 +1,6 @@
 ﻿using BusinessLogicModule.Interfaces;
 using BusinessLogicModule.Repositories;
+using NLog;
 using SharedServicesModule.Models;
 using System;
 using System.Windows;
@@ -9,6 +10,7 @@ namespace UIModule.ViewModels
 {
     class AddNewProjectViewModel : NavigateViewModel
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         IProjectRepository _projectRepository;
 
@@ -68,6 +70,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_create_project"].ToString() + "\n" + ex.Message);
                     }
                 });

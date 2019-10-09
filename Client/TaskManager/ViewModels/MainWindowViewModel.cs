@@ -1,5 +1,6 @@
 ﻿using BusinessLogicModule.Interfaces;
 using BusinessLogicModule.Repositories;
+using NLog;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -8,6 +9,7 @@ namespace UIModule.ViewModels
 {
     public class MainWindowViewModel : NavigateViewModel
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         IRoleRepository _roleRepository;
         IPermissionRepository _permissionRepository;
         IRolePermissionRepository _rolePermissionRepository;

@@ -2,6 +2,7 @@
 using BusinessLogicModule.Repositories;
 using GalaSoft.MvvmLight.CommandWpf;
 using MaterialDesignThemes.Wpf;
+using NLog;
 using SharedServicesModule.Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace UIModule.ViewModels
 {
     public class ProjectsViewModel : NavigateViewModel
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         IProjectRepository _projectRepository;
         IUserRepository _userRepository;
         IRoleRepository _roleRepository;
@@ -154,6 +156,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -173,6 +176,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Debug(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -185,9 +189,18 @@ namespace UIModule.ViewModels
             {
                 return new DelegateCommand(async (obj) =>
                 {
-                    User user = await _userRepository.GetUser(System.Windows.Application.Current.Properties["UserName"].ToString());
-                    ListProjects = ListProjects.Where(p => p.AdminId == user.Id).ToList();
-                    CheckCountProjects(ListProjects);
+                    try
+                    {
+                        User user = await _userRepository.GetUser(System.Windows.Application.Current.Properties["UserName"].ToString());
+                        ListProjects = ListProjects.Where(p => p.AdminId == user.Id).ToList();
+                        CheckCountProjects(ListProjects);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        logger.Debug(ex.ToString());
+                    }
+                    
                 });
             }
         }
@@ -198,7 +211,15 @@ namespace UIModule.ViewModels
             {
                 return new DelegateCommand(async (obj) =>
                 {
-                    ListProjects = Filter == null ? await GetRecordListBoxes() : (await FilterProjects());
+                    try
+                    {
+                        ListProjects = Filter == null ? await GetRecordListBoxes() : (await FilterProjects());
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        logger.Debug(ex.ToString());
+                    }
                 });
             }
         }
@@ -209,14 +230,22 @@ namespace UIModule.ViewModels
             {
                 return new DelegateCommand(async (obj) =>
                 {
-                    List<RecordListBox> recordListBoxes = await FilterProjects();
-                    if (Personal)
+                    try
                     {
-                        User user = await _userRepository.GetUser(System.Windows.Application.Current.Properties["UserName"].ToString());
-                        recordListBoxes = recordListBoxes.Where(p => p.AdminId == user.Id).ToList();
+                        List<RecordListBox> recordListBoxes = await FilterProjects();
+                        if (Personal)
+                        {
+                            User user = await _userRepository.GetUser(System.Windows.Application.Current.Properties["UserName"].ToString());
+                            recordListBoxes = recordListBoxes.Where(p => p.AdminId == user.Id).ToList();
+                        }
+                        CheckCountProjects(recordListBoxes);
+                        ListProjects = recordListBoxes;
                     }
-                    CheckCountProjects(recordListBoxes);
-                    ListProjects = recordListBoxes;
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        logger.Debug(ex.ToString());
+                    }
                 });
             }
         }
