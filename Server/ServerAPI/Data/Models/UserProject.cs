@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ServerAPI.Data
+namespace ServerAPI.Data.Models
 {
     [Table("UserProject")]
     public partial class UserProject

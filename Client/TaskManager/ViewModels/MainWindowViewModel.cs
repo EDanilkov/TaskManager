@@ -1,5 +1,5 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Repositories;
+using BusinessLogicModule.Interfaces;
 using NLog;
 using System;
 using System.Windows;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using ServerAPI.Data.Models;
 using System.IO;
 
 namespace ServerAPI.Data

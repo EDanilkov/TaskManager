@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServerAPI.Data;
-using ServerAPI.Models;
+using ServerAPI.Data.Models;
+using SharedServicesModule.ResponseModel;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace ServerAPI.Controllers
         }
         
         [HttpPost("new")]
-        public async Task<IActionResult> AddProject([FromBody]Project project)
+        public async Task<IActionResult> AddProject([FromBody]Data.Models.Project project)
         {
 
             NewResponseModel NewProjectResponseModel = new NewResponseModel();
@@ -61,19 +62,19 @@ namespace ServerAPI.Controllers
         }
 
         [HttpGet("{projectId}")]
-        public async Task<ActionResult<Project>> GetProject(int projectId)
+        public async Task<ActionResult<Data.Models.Project>> GetProject(int projectId)
             => await _db.GetProject(projectId);
 
         [HttpGet("all")]
-        public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
+        public async Task<ActionResult<IEnumerable<Data.Models.Project>>> GetProjects()
             => await _db.GetProjects();
 
         [HttpGet("users/{userName}")]
-        public async Task<ActionResult<IEnumerable<Project>>> GetProjectsByUser(string userName)
+        public async Task<ActionResult<IEnumerable<Data.Models.Project>>> GetProjectsByUser(string userName)
             => await _db.GetProjectsFromUser(userName);
 
         [HttpGet("tasks/{userId}")]
-        public async Task<ActionResult<IEnumerable<Data.Task>>> GetTasksByUser(int userId)
+        public async Task<ActionResult<IEnumerable<Data.Models.Task>>> GetTasksByUser(int userId)
             => await _db.GetTasksFromUser(userId);
     }
 }

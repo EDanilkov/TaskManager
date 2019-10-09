@@ -1,5 +1,5 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Repositories;
+using Ninject;
 using NLog;
 using SharedServicesModule.Models;
 using System;

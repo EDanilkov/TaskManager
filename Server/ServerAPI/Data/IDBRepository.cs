@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ServerAPI.Data.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TaskThreading = System.Threading.Tasks.Task;
 
@@ -8,16 +9,16 @@ namespace ServerAPI.Data
     {
         #region Task
 
-        TaskThreading AddTask(Task task);
-        TaskThreading DeleteTask(Task task);
+        TaskThreading AddTask(Models.Task task);
+        TaskThreading DeleteTask(Models.Task task);
         TaskThreading DeleteTask(int taskId);
         TaskThreading DeleteProject(int projectId);
-        TaskThreading ChangeTask(Task task);
-        Task<List<Task>> GetTasks();
-        Task<List<Task>> GetTasks(int userId, int projectId);
-        Task<Task> GetTask(int taskId);
-        Task<List<Task>> GetTasksFromUser(int userId);
-        Task<List<Task>> GetProjectTasksFromUser(int userId, int projectId);
+        TaskThreading ChangeTask(Models.Task task);
+        Task<List<Models.Task>> GetTasks();
+        Task<List<Models.Task>> GetTasks(int userId, int projectId);
+        Task<Models.Task> GetTask(int taskId);
+        Task<List<Models.Task>> GetTasksFromUser(int userId);
+        Task<List<Models.Task>> GetProjectTasksFromUser(int userId, int projectId);
 
         #endregion
 
@@ -68,7 +69,7 @@ namespace ServerAPI.Data
         Task<Project> GetProject(int projectId);
         Task<List<Project>> GetProjects();
         Task<List<User>> GetUsersFromProject(int projectId);
-        Task<List<Task>> GetTasksFromProject(int projectId);
+        Task<List<Models.Task>> GetTasksFromProject(int projectId);
 
         #endregion
 

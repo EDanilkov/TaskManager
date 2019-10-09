@@ -74,66 +74,66 @@
             Grid.Column="1"
             VerticalAlignment="Bottom"/>
 
-        <StackPanel 
-            Grid.Row="1"
-            Grid.Column="1"
-            Orientation="Vertical">
-            <Grid
-                MinHeight="40">
-                <StackPanel
-                    Style="{DynamicResource HorizontalStackPanel}">
-                    <TextBlock 
-                        Margin="10"
-                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                        Text="{DynamicResource mPersonal}"/>
-                    <ToggleButton
-                        IsChecked="{Binding Personal}"
-                        Style="{StaticResource MaterialDesignSwitchToggleButton}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Unchecked">
-                                <i:InvokeCommandAction Command="{Binding PersonalUnChecked}"/>
-                            </i:EventTrigger>
-                            <i:EventTrigger EventName="Checked">
-                                <i:InvokeCommandAction Command="{Binding PersonalChecked}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ToggleButton>
-                </StackPanel>
-                <StackPanel
-                    Style="{DynamicResource RightHorizontalStackPanel}">
-                    <TextBox
-                        Text="{Binding Path=Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        materialDesign:HintAssist.Hint="{DynamicResource mFilterByName}"
-                        MinWidth="200"
-                        VerticalAlignment="Center">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding FilterChanged}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </TextBox>
-                </StackPanel>
-            </Grid>
-
-            <Separator 
-                Grid.Row="0"
-                Grid.Column="1"
-                VerticalAlignment="Bottom"/>
-
-                <StackPanel
-                Grid.Column="1"
+            <StackPanel 
                 Grid.Row="1"
-                Style="{DynamicResource TitleStackPanel}">
+                Grid.Column="1"
+                Orientation="Vertical">
+                <Grid
+                 MinHeight="40">
                     <StackPanel
-                    Margin="20"
-                    Visibility="{Binding NotProjectsVisibility}"
-                    Orientation="Vertical">
+                        Style="{DynamicResource HorizontalStackPanel}">
+                        <TextBlock 
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                            Text="{DynamicResource mPersonal}"/>
+                        <ToggleButton
+                            IsChecked="{Binding Personal}"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{Binding PersonalUnChecked}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding PersonalChecked}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ToggleButton>
+                    </StackPanel>
+                    <StackPanel
+                     Style="{DynamicResource RightHorizontalStackPanel}">
+                        <TextBox
+                            Text="{Binding Path=Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            materialDesign:HintAssist.Hint="{DynamicResource mFilterByName}"
+                            MinWidth="200"
+                            VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding FilterChanged}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </StackPanel>
+                </Grid>
+
+                <Separator 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    VerticalAlignment="Bottom"/>
+
+                <StackPanel
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Style="{DynamicResource TitleStackPanel}">
+                    <StackPanel
+                        Margin="20"
+                        Visibility="{Binding NotProjectsVisibility}"
+                        Orientation="Vertical">
                         <materialDesign:PackIcon 
-                        Style="{DynamicResource CodeNotEqualVariant}" />
+                            Style="{DynamicResource CodeNotEqualVariant}" />
                         <TextBlock
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                        Text="{DynamicResource mNoPersonalProjects}"/>
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                            Text="{DynamicResource mNoPersonalProjects}"/>
                     </StackPanel>
 
                     <ScrollViewer 
@@ -155,7 +155,7 @@
                     </ScrollViewer>
                 </StackPanel>
             </StackPanel>
-    </Grid>
+        </Grid>
 
     </materialDesign:DialogHost>
 </Page>

@@ -5,7 +5,7 @@ using SharedServicesModule.Models;
 using SharedServicesModule.ResponseModel;
 using System.Threading.Tasks;
 
-namespace BusinessLogicModule.Repositories
+namespace BusinessLogicModule.Interfaces
 {
     public class UserProjectRepository : IUserProjectRepository
     {

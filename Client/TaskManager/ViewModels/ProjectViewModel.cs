@@ -1,6 +1,4 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Repositories;
-using BusinessLogicModule.Services;
 using MaterialDesignThemes.Wpf;
 using NLog;
 using SharedServicesModule.Models;

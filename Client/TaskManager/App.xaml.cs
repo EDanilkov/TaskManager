@@ -1,4 +1,5 @@
 ﻿using BusinessLogicModule.Services;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -31,7 +32,8 @@ namespace UIModule
 
         public App()
         {
-            //УДАЛИТЬ
+
+
             displayRootRegistry.RegisterWindowType<AuthorizationWindowViewModel, AuthorizationWindow>();
             displayRootRegistry.RegisterWindowType<MainWindowViewModel, MainWindow>();
 
@@ -43,6 +45,21 @@ namespace UIModule
             m_Languages.Add(new CultureInfo("ru-RU"));
 
             Language = UIModule.Properties.Settings.Default.DefaultLanguage;
+        }
+
+
+        private IKernel _iocKernel;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            DI.IocKernel.Initialize(new DI.IocConfiguration());
+
+            base.OnStartup(e);
+
+            _iocKernel = new StandardKernel();
+
+            Current.MainWindow = _iocKernel.Get<AuthorizationWindow>();
+            Current.MainWindow.Show();
         }
 
         //Евент для оповещения всех окон приложения

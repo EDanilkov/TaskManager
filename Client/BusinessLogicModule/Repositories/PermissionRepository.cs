@@ -1,12 +1,11 @@
 ﻿using BusinessLogicModule.Services;
-using BusinessLogicModule.Interfaces;
 using Newtonsoft.Json;
 using SharedServicesModule.Models;
 using SharedServicesModule.ResponseModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BusinessLogicModule.Repositories
+namespace BusinessLogicModule.Interfaces
 {
     public class PermissionRepository : IPermissionRepository
     {

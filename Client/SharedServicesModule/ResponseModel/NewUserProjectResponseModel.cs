@@ -1,4 +1,4 @@
-﻿namespace ServerAPI.Models
+﻿namespace SharedServicesModule.ResponseModel
 {
     public class NewUserProjectResponseModel
     {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ServerAPI.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace ServerAPI.Data
 
         #region Task
 
-        public async TaskThreading AddTask(Task task)
+        public async TaskThreading AddTask(Models.Task task)
         {
             await _db.Task.AddAsync(task);
             await _db.SaveChangesAsync();
@@ -21,12 +22,12 @@ namespace ServerAPI.Data
 
         public async TaskThreading DeleteTask(int taskId)
         {
-            Task task = await GetTask(taskId);
+            Models.Task task = await GetTask(taskId);
             _db.Task.Remove(task);
             await _db.SaveChangesAsync();
         }
 
-        public async TaskThreading DeleteTask(Task task)
+        public async TaskThreading DeleteTask(Models.Task task)
         {
             _db.Task.Remove(task);
             await _db.SaveChangesAsync();
@@ -39,24 +40,24 @@ namespace ServerAPI.Data
             _db.SaveChanges();
         }
         
-        public async TaskThreading ChangeTask(Task task)
+        public async TaskThreading ChangeTask(Models.Task task)
         {
             await _db.SaveChangesAsync();
         }
 
-        public async Task<List<Task>> GetTasks()
+        public async Task<List<Models.Task>> GetTasks()
             => await _db.Task.ToListAsync();
 
-        public async Task<List<Task>> GetTasks(int userId, int projectId)
+        public async Task<List<Models.Task>> GetTasks(int userId, int projectId)
             => (await GetTasks()).Where(c => c.ProjectId == projectId && c.UserId == userId).ToList();
 
-        public async Task<Task> GetTask(int taskId)
+        public async Task<Models.Task> GetTask(int taskId)
             => await _db.Task.Where(c => c.Id == taskId).FirstAsync();
 
-        public async Task<List<Task>> GetTasksFromUser(int userId)
+        public async Task<List<Models.Task>> GetTasksFromUser(int userId)
              => (await GetTasks()).Where(c => c.UserId == userId).ToList();
 
-        public async Task<List<Task>> GetProjectTasksFromUser(int userId, int projectId)
+        public async Task<List<Models.Task>> GetProjectTasksFromUser(int userId, int projectId)
             => (await GetTasks()).Where(c => c.ProjectId == projectId && c.UserId == userId).ToList();
 
         #endregion
@@ -162,8 +163,8 @@ namespace ServerAPI.Data
 
         public async TaskThreading DeleteTasksFromProject(int projectId)
         {
-            List<Data.Task> tasks = await GetTasksFromProject(projectId);
-            foreach (Data.Task task in tasks)
+            List<Models.Task> tasks = await GetTasksFromProject(projectId);
+            foreach (Models.Task task in tasks)
             {
                 await DeleteTask(task);
             }
@@ -186,8 +187,8 @@ namespace ServerAPI.Data
         
         public async TaskThreading DeleteTasksFromUser(int userId, int projectId)
         {
-            List<Data.Task> tasks = await GetTasks(userId, projectId);
-            foreach (Task task in tasks)
+            List<Models.Task> tasks = await GetTasks(userId, projectId);
+            foreach (Models.Task task in tasks)
             {
                 await DeleteTask(task);
             }
@@ -210,7 +211,7 @@ namespace ServerAPI.Data
             return users;
         }
         
-        public async Task<List<Task>> GetTasksFromProject(int projectId)
+        public async Task<List<Models.Task>> GetTasksFromProject(int projectId)
             => (await _db.Task.ToListAsync()).Where(c => c.ProjectId == projectId).ToList();
 
         #endregion

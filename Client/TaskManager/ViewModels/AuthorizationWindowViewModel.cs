@@ -1,5 +1,5 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Repositories;
+using BusinessLogicModule.Interfaces;
 using NLog;
 using SharedServicesModule;
 using SharedServicesModule.Models;
@@ -171,6 +171,7 @@ namespace UIModule.ViewModels
                             var displayRootRegistry = (Application.Current as App).displayRootRegistry;
                             await displayRootRegistry.ShowModalPresentation(new MainWindowViewModel());
                             CloseAction();
+                            logger.Info("The user " + user.Login + " is logged in to the app");
                         }
                         else
                         {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServerAPI.Data;
-using ServerAPI.Models;
+using SharedServicesModule.ResponseModel;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,7 +21,7 @@ namespace ServerAPI.Controllers
         }
 
         [HttpPost("new")]
-        public IActionResult AddTask([FromBody]Data.Task task)
+        public IActionResult AddTask([FromBody]Data.Models.Task task)
         {
             NewResponseModel newTaskResponseModel = new NewResponseModel();
             try
@@ -44,7 +44,7 @@ namespace ServerAPI.Controllers
             NewResponseModel newTaskResponseModel = new NewResponseModel();
             try
             {
-                Data.Task task = await _db.GetTask(updateTaskModel.Task.Id); //Data.Task.FirstAsync(c => c.Id == updateTaskModel.Task.Id);
+                Data.Models.Task task = await _db.GetTask(updateTaskModel.Task.Id); //Data.Task.FirstAsync(c => c.Id == updateTaskModel.Task.Id);
                 task.Name = updateTaskModel.TaskName;
                 task.Description = updateTaskModel.TaskDescription;
                 task.UserId = updateTaskModel.UserId;
@@ -76,19 +76,19 @@ namespace ServerAPI.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<ActionResult<IEnumerable<Data.Task>>> GetTasks()
+        public async Task<ActionResult<IEnumerable<Data.Models.Task>>> GetTasks()
           => await _db.GetTasks();
 
         [HttpGet("{taskId}")]
-        public async Task<ActionResult<Data.Task>> GetTask(int taskId)
+        public async Task<ActionResult<Data.Models.Task>> GetTask(int taskId)
           => await _db.GetTask(taskId);
         
         [HttpGet("projects/{projectId}")]
-        public async Task<ActionResult<IEnumerable<Data.Task>>> GetTasksFromProject(int projectId)
+        public async Task<ActionResult<IEnumerable<Data.Models.Task>>> GetTasksFromProject(int projectId)
             => await _db.GetTasksFromProject(projectId);
         
         [HttpGet("{userId}/{projectId}")]
-        public async Task<List<Data.Task>> GetProjectTasksByUser(int userId, int projectId)
+        public async Task<List<Data.Models.Task>> GetProjectTasksByUser(int userId, int projectId)
             => await _db.GetProjectTasksFromUser(userId, projectId);
 
     }

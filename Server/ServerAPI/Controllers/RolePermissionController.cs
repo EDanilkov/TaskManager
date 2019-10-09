@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServerAPI.Data;
-using ServerAPI.Models;
+using ServerAPI.Data.Models;
+using SharedServicesModule.ResponseModel;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ServerAPI.Controllers
 {
+    [Authorize]
     [Route("api/role-permissions")]
     [ApiController]
     public class RolePermissionController : ControllerBase
@@ -37,8 +39,7 @@ namespace ServerAPI.Controllers
             }
 
         }
-
-        [Authorize]
+        
         [HttpGet("{roleId}")]
         public async Task<ActionResult<IEnumerable<RolePermission>>> GetRolePermissionByRoleId(int roleId)
           => await _db.GetRolePermissionByRoleId(roleId);

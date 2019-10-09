@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ServerAPI.Data
+namespace ServerAPI.Data.Models
 {
     [Table("RolePermission")]
     public partial class RolePermission

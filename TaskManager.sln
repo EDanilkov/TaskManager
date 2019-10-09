@@ -8,6 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{27743AB0-1A7C-4702-84B9-AE38856AAC51}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerAPI", "Server\ServerAPI\ServerAPI.csproj", "{F5808B33-B84F-4D44-AAE5-7EBF445BDBF0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{11FFC1D2-9DDB-42F3-92D5-052BF8BE73B2} = {11FFC1D2-9DDB-42F3-92D5-052BF8BE73B2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIModule", "Client\TaskManager\UIModule.csproj", "{B94163D0-005B-46C8-8A04-3678C973C99D}"
 EndProject

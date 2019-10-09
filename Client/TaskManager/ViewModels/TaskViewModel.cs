@@ -1,5 +1,5 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Repositories;
+using BusinessLogicModule.Interfaces;
 using BusinessLogicModule.Services;
 using MaterialDesignThemes.Wpf;
 using NLog;
@@ -335,7 +335,7 @@ namespace UIModule.ViewModels
             Project project = await _projectRepository.GetProject(projectId);
             TitleProject = "";
             TitleProject += project.Name;
-            UserName = (await _userRepository.GetUser(id: task.UserId)).Login;
+            UserName = ": " + (await _userRepository.GetUser(id: task.UserId)).Login;
             TaskDescriprion = task.Description;
             TaskFinishDate = ": " + task.EndDate.ToShortDateString();
         }

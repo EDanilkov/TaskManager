@@ -2,10 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ServerAPI.Data
+namespace ServerAPI.Data.Models
 {
-    [Table("Project")]
-    public partial class Project
+    [Table("Task")]
+    public partial class Task
     {
         public int Id { get; set; }
 
@@ -17,10 +17,14 @@ namespace ServerAPI.Data
         [StringLength(250)]
         public string Description { get; set; }
 
-        public DateTime RegistrationDate { get; set; }
+        public int UserId { get; set; }
 
-        public DateTime? FinishDate { get; set; }
+        public int ProjectId { get; set; }
 
-        public int AdminId { get; set; }
+        public DateTime BeginDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+
+        public virtual Project Project { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ServerAPI.Data
+namespace ServerAPI.Data.Models
 {
     [Table("User")]
     public partial class User

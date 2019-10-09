@@ -5,43 +5,46 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
-    StartupUri="Views/AuthorizationWindow.xaml"
+    xmlns:local="clr-namespace:UIModule.ViewModels"
+    xmlns:view="clr-namespace:UIModule.Pages"
     d1p1:Ignorable="d">
-  <Application.Resources>
-    <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Resources/lang.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml">
-        </ResourceDictionary>
+    <Application.Resources>
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/AllStyles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+                <ResourceDictionary Source="Resources/lang.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml">
+                </ResourceDictionary>
 
-        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml">
-        </ResourceDictionary>
-        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml">
-        </ResourceDictionary>
-        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
-                
-          
-        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml">
-        </ResourceDictionary>
-        <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml">
-        </ResourceDictionary>
-        <!-- Цвет TabControl Основной-->
-        <ResourceDictionary>
-          <!--Цвет-->
-          <ResourceDictionary.MergedDictionaries>
-            <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.indigo.xaml">
-            </ResourceDictionary>
-          </ResourceDictionary.MergedDictionaries>
-          <!--Оттенок-->
-          <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource Primary600}" />
-        </ResourceDictionary>
-        <!-- Цвет TabControl Дополнительный(нижняя полоса при выборе)-->
+
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="Styles/AllStyles.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml">
+                </ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml">
+                </ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+
+
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml">
+                </ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml">
+                </ResourceDictionary>
+                <!-- Цвет TabControl Основной-->
+                <ResourceDictionary>
+                    <!--Цвет-->
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.indigo.xaml">
+                        </ResourceDictionary>
+                    </ResourceDictionary.MergedDictionaries>
+                    <!--Оттенок-->
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource Primary600}" />
+                </ResourceDictionary>
+                <!-- Цвет TabControl Дополнительный(нижняя полоса при выборе)-->
                 <ResourceDictionary>
                     <!--Цвет-->
                     <ResourceDictionary.MergedDictionaries>
@@ -52,7 +55,7 @@
                     <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Primary100}" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-      <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />
-    </ResourceDictionary>
-  </Application.Resources>
+            <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

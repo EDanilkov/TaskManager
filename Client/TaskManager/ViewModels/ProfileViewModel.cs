@@ -1,5 +1,5 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Repositories;
+using BusinessLogicModule.Interfaces;
 using NLog;
 using SharedServicesModule.Models;
 using System;
@@ -29,6 +29,17 @@ namespace UIModule.ViewModels
             set
             {
                 _login = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _height;
+        public int Height
+        {
+            get { return _height; }
+            set
+            {
+                _height = value;
                 OnPropertyChanged();
             }
         }
@@ -77,6 +88,8 @@ namespace UIModule.ViewModels
                 {
                     try
                     {
+                        Height = int.Parse(Application.Current.Properties["WindowHeight"] == null ? "0" : Application.Current.Properties["WindowHeight"].ToString());
+
                         Login = System.Windows.Application.Current.Properties["UserName"].ToString();
                         User user = await _userRepository.GetUser(Login);
                         List<Task> tasks = await _projectRepository.GetTasksFromUser(user.Id);
@@ -97,6 +110,25 @@ namespace UIModule.ViewModels
                         }
                         ListRecords = records;
                         TaskInfo = ListRecords.Count == 0 ? "You don't have Tasks." : "Tasks:";
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Debug(ex.ToString());
+                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                    }
+                });
+            }
+        }
+
+        public ICommand SizeChanged
+        {
+            get
+            {
+                return new DelegateCommand(async (obj) =>
+                {
+                    try
+                    {
+                        Height = int.Parse(Application.Current.Properties["WindowHeight"] == null ? "0" : Application.Current.Properties["WindowHeight"].ToString());
                     }
                     catch (Exception ex)
                     {

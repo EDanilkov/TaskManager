@@ -10,17 +10,12 @@
       d:DesignWidth="1080"
       Title="Project">
 
-    <Page.Resources>
-        <Style x:Key="TitleName">
-            <Setter Property="Control.Foreground"  Value="Blue" />
-            <Setter Property="Control.FontWeight" Value="Bold"/>
-            <Setter Property="Control.Margin" Value="10"/>
-        </Style>
-    </Page.Resources>
-
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="SizeChanged">
+            <i:InvokeCommandAction Command="{Binding SizeChanged}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -42,7 +37,7 @@
             <RowDefinition 
                 Height="100*"/>
             <RowDefinition 
-                Height="600*"/>
+                Height="500*"/>
         </Grid.RowDefinitions>
 
         <StackPanel 
@@ -52,32 +47,39 @@
             <TextBlock 
                 VerticalAlignment="Center"
                 Text="{Binding Login}"
-                Style="{StaticResource TitleName}"/>
+                Style="{DynamicResource TitleName}"/>
         </StackPanel>
         <StackPanel 
             Grid.Row="1"
             Grid.Column="1"
             Style="{DynamicResource VerticalStackPanel}">
-        <Separator/>
+            <Separator/>
             <TextBlock 
+                Margin="5"
                 Text="{Binding TaskInfo}"
-                Style="{StaticResource TitleName}"/>
-            <DataGrid 
-                GridLinesVisibility="Horizontal"
-                IsReadOnly="True"  
-                AlternatingRowBackground="#E8EAF6"
-                RowBackground="#C5CAE9"                
-                Background="#000054"
-                Foreground="Black"
-                ItemsSource="{Binding ListRecords}" 
-                SelectedValue="{Binding SelectedTask}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionChanged}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </DataGrid>
-            
+                Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+            <ScrollViewer 
+                VerticalScrollBarVisibility="Auto">
+                <DataGrid 
+                    MaxHeight="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    GridLinesVisibility="Horizontal"
+                    IsReadOnly="True"  
+                    AlternatingRowBackground="#E8EAF6"
+                    RowBackground="#C5CAE9"                
+                    Background="#000054"
+                    Foreground="Black"
+                    ItemsSource="{Binding ListRecords}" 
+                    SelectedValue="{Binding SelectedTask}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChanged}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DataGrid>
+            </ScrollViewer>
+
+
+
         </StackPanel>
     </Grid>
 </Page>

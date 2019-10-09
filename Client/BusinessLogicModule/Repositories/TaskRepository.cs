@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BusinessLogicModule.Repositories
+namespace BusinessLogicModule.Interfaces
 {
     public class TaskRepository : ITaskRepository
     {

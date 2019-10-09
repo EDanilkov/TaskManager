@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Client\SharedServicesModule\SharedServicesModule.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>EntityFramework</HintPath>
     </Reference>

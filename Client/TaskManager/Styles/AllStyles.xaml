@@ -13,7 +13,6 @@
         <ResourceDictionary Source="GridStyles.xaml" />
         <ResourceDictionary Source="TabControlStyles.xaml" />
         <ResourceDictionary Source="ComboBoxStyles.xaml" />
-        <ResourceDictionary Source="Dialogs.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

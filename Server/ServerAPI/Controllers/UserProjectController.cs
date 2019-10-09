@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServerAPI.Data;
-using ServerAPI.Models;
+using ServerAPI.Data.Models;
+using SharedServicesModule.ResponseModel;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
