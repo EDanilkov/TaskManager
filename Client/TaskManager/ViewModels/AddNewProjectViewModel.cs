@@ -1,5 +1,4 @@
 ﻿using BusinessLogicModule.Interfaces;
-using Ninject;
 using NLog;
 using SharedServicesModule.Models;
 using System;
@@ -14,10 +13,10 @@ namespace UIModule.ViewModels
         IUserRepository _userRepository;
         IProjectRepository _projectRepository;
 
-        public AddNewProjectViewModel()
+        public AddNewProjectViewModel(IUserRepository userRepository, IProjectRepository projectRepository)
         {
-            _userRepository = new UserRepository();
-            _projectRepository = new ProjectRepository();
+            _userRepository = userRepository;
+            _projectRepository = projectRepository;
         }
 
         private string _projectName;

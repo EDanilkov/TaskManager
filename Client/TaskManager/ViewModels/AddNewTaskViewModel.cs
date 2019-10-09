@@ -1,5 +1,4 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Interfaces;
 using NLog;
 using SharedServicesModule.Models;
 using System;
@@ -15,10 +14,11 @@ namespace UIModule.ViewModels
         IUserRepository _userRepository;
         ITaskRepository _taskRepository;
 
-        public AddNewTaskViewModel()
+
+        public AddNewTaskViewModel(IUserRepository userRepository, ITaskRepository taskRepository)
         {
-            _userRepository = new UserRepository();
-            _taskRepository = new TaskRepository();
+            _userRepository = userRepository;
+            _taskRepository = taskRepository;
         }
 
         private string _taskName;

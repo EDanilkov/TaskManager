@@ -6,6 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
+             DataContext="{Binding AddNewMemberViewModel, Source={StaticResource ViewModelLocator}}"
              d:DesignHeight="300" d:DesignWidth="300">
     
     <i:Interaction.Triggers>

@@ -1,6 +1,4 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Services;
 using MaterialDesignThemes.Wpf;
 using NLog;
 using SharedServicesModule.Models;
@@ -21,15 +19,16 @@ namespace UIModule.ViewModels
         IPermissionRepository _permissionRepository;
         IProjectRepository _projectRepository;
 
-        public TaskViewModel()
+
+        public TaskViewModel(IUserRepository userRepository, ITaskRepository taskRepository, IProjectRepository projectRepository, IPermissionRepository permissionRepository, IRoleRepository roleRepository, IUserProjectRepository userProjectRepository)
         {
             Title = "Task";
 
-            _userRepository = new UserRepository();
-            _taskRepository = new TaskRepository();
-            _roleRepository = new RoleRepository();
-            _permissionRepository = new PermissionRepository();
-            _projectRepository = new ProjectRepository();
+            _userRepository = userRepository;
+            _taskRepository = taskRepository;
+            _projectRepository = projectRepository;
+            _permissionRepository = permissionRepository;
+            _roleRepository = roleRepository;
         }
 
         private string _titleName;
@@ -321,7 +320,7 @@ namespace UIModule.ViewModels
         {
             var view = new Pages.ChangeTask
             {
-                DataContext = new ChangeTaskViewModel()
+                DataContext = new ChangeTaskViewModel(_userRepository, _taskRepository)
             };
 
             var result = await DialogHost.Show(view, "ChangeTaskDialog", ClosingEventHandler);

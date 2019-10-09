@@ -1,5 +1,4 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Interfaces;
 using NLog;
 using System;
 using System.Windows;
@@ -10,15 +9,11 @@ namespace UIModule.ViewModels
     public class MainWindowViewModel : NavigateViewModel
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        IRoleRepository _roleRepository;
-        IPermissionRepository _permissionRepository;
-        IRolePermissionRepository _rolePermissionRepository;
+        IUserRepository _userRepository;
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IUserRepository userRepository)
         {
-            _roleRepository = new RoleRepository();
-            _permissionRepository = new PermissionRepository();
-            _rolePermissionRepository = new RolePermissionRepository();
+            _userRepository = userRepository;
         }
 
         private int _height;
@@ -83,7 +78,7 @@ namespace UIModule.ViewModels
                 {
                     Application.Current.Properties["UserName"] = null;
                     var displayRootRegistry = (Application.Current as App).displayRootRegistry;
-                    await displayRootRegistry.ShowModalPresentation(new AuthorizationWindowViewModel());
+                    await displayRootRegistry.ShowModalPresentation(new AuthorizationWindowViewModel(_userRepository));
                     CloseAction();
                 });
             }

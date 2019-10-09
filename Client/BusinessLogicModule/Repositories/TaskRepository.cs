@@ -1,5 +1,4 @@
 ﻿using BusinessLogicModule.Services;
-using BusinessLogicModule.Interfaces;
 using Newtonsoft.Json;
 using SharedServicesModule.ResponseModel;
 using System;

@@ -3,18 +3,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:UIModule.ViewModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Height="{Binding Height, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+        DataContext="{Binding MainWindowViewModel, Source={StaticResource ViewModelLocator}}"
         MinWidth="490"
         MinHeight="290"
         Title="Task Manager" 
         WindowStartupLocation="CenterScreen">
-
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

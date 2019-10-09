@@ -1,5 +1,4 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Interfaces;
 using NLog;
 using SharedServicesModule.Models;
 using System;
@@ -18,12 +17,12 @@ namespace UIModule.ViewModels
         IRoleRepository _roleRepository;
         IUserProjectRepository _userProjectRepository;
 
-        public AddNewMemberViewModel()
+        public AddNewMemberViewModel(IUserRepository userRepository, IProjectRepository projectRepository, IRoleRepository roleRepository, IUserProjectRepository userProjectRepository)
         {
-            _userRepository = new UserRepository();
-            _projectRepository = new ProjectRepository();
-            _roleRepository = new RoleRepository();
-            _userProjectRepository = new UserProjectRepository();
+            _userRepository = userRepository;
+            _projectRepository = projectRepository;
+            _roleRepository = roleRepository;
+            _userProjectRepository = userProjectRepository;
         }
 
         private Role _selectedRole;

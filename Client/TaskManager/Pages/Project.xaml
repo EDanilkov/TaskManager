@@ -6,7 +6,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-      xmlns:vm="clr-namespace:UIModule.ViewModels"
+      DataContext="{Binding ProjectViewModel, Source={StaticResource ViewModelLocator}}"
       mc:Ignorable="d"
       d:DesignWidth="1080"
       d:DesignHeight="600"
@@ -18,10 +18,6 @@
             <i:InvokeCommandAction Command="{Binding Loaded}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-
-    <Page.DataContext>
-        <vm:ProjectViewModel/>
-    </Page.DataContext>
 
     <materialDesign:DialogHost
         Identifier="RootDialog"

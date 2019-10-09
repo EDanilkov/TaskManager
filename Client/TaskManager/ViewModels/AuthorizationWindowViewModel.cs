@@ -1,11 +1,9 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Interfaces;
 using NLog;
 using SharedServicesModule;
 using SharedServicesModule.Models;
 using SharedServicesModule.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,20 +17,14 @@ namespace UIModule.ViewModels
         private static Logger logger = LogManager.GetCurrentClassLogger();
         public static Action CloseAction { get; set; }
         IUserRepository _userRepository;
-        IRoleRepository _roleRepository;
-        IPermissionRepository _permissionRepository;
-        IRolePermissionRepository _rolePermissionRepository;
-
-        public AuthorizationWindowViewModel()
+        
+        public AuthorizationWindowViewModel(IUserRepository userRepository)
         {
-            _userRepository = new UserRepository();
-            _roleRepository = new RoleRepository();
-            _permissionRepository = new PermissionRepository();
-            _rolePermissionRepository = new RolePermissionRepository();
+            _userRepository = userRepository;
         }
 
         #region Properties
-        
+
         private string _login;
         public string Login
         {
@@ -82,64 +74,6 @@ namespace UIModule.ViewModels
 
         #region Methods
 
-        public ICommand Loaded
-        {
-            get
-            {
-                return new DelegateCommand(async (obj) =>
-                {
-                    try
-                    {
-                        List<Role> roles = await _roleRepository.GetRoles();
-                        if (roles.Count == 0)
-                        {
-                            Permission AddNewTask = new Permission() { Name = "AddNewTask" };
-                            await _permissionRepository.AddPermission(AddNewTask);
-                            Permission ChangeTask = new Permission() { Name = "ChangeTask" };
-                            await _permissionRepository.AddPermission(ChangeTask);
-                            Permission DeleteTask = new Permission() { Name = "DeleteTask" };
-                            await _permissionRepository.AddPermission(DeleteTask);
-                            Permission VisibilityTask = new Permission() { Name = "VisibilityTask" };
-                            await _permissionRepository.AddPermission(VisibilityTask);
-                            Permission DeleteProject = new Permission() { Name = "DeleteProject" };
-                            await _permissionRepository.AddPermission(DeleteProject);
-                            Permission AddNewMembers = new Permission() { Name = "AddNewMembers" };
-                            await _permissionRepository.AddPermission(AddNewMembers);
-                            Permission DeleteMembers = new Permission() { Name = "DeleteMembers" };
-                            await _permissionRepository.AddPermission(DeleteMembers);
-                            Permission ChangeRole = new Permission() { Name = "ChangeRole" };
-                            await _permissionRepository.AddPermission(ChangeRole);
-                            List<Permission> permissions = new List<Permission>() { (await _permissionRepository.GetPermission("AddNewTask")), (await _permissionRepository.GetPermission("ChangeTask")), (await _permissionRepository.GetPermission("DeleteTask")), (await _permissionRepository.GetPermission("VisibilityTask")), (await _permissionRepository.GetPermission("DeleteProject")), (await _permissionRepository.GetPermission("AddNewMembers")), (await _permissionRepository.GetPermission("DeleteMembers")), (await _permissionRepository.GetPermission("ChangeRole")) };
-                            Role Admin = new Role() { Name = "Admin" };
-                            Role Developer = new Role() { Name = "Developer" };
-                            Role Manager = new Role() { Name = "Manager" };
-                            await _roleRepository.AddRole(Admin);
-                            await _roleRepository.AddRole(Developer);
-                            await _roleRepository.AddRole(Manager);
-                            foreach (Permission permission in permissions)
-                            {
-                                RolePermission rolePermission = new RolePermission() { RoleId = (await _roleRepository.GetRole("Admin")).Id, PermissionId = permission.Id };
-                                await _rolePermissionRepository.AddRolePermission(rolePermission);
-                            }
-                            RolePermission rolePermission1 = new RolePermission() { RoleId = (await _roleRepository.GetRole("Manager")).Id, PermissionId = (await _permissionRepository.GetPermission("AddNewTask")).Id };
-                            RolePermission rolePermission2 = new RolePermission() { RoleId = (await _roleRepository.GetRole("Manager")).Id, PermissionId = (await _permissionRepository.GetPermission("ChangeTask")).Id };
-                            RolePermission rolePermission3 = new RolePermission() { RoleId = (await _roleRepository.GetRole("Manager")).Id, PermissionId = (await _permissionRepository.GetPermission("DeleteTask")).Id };
-                            RolePermission rolePermission4 = new RolePermission() { RoleId = (await _roleRepository.GetRole("Manager")).Id, PermissionId = (await _permissionRepository.GetPermission("VisibilityTask")).Id };
-                            await _rolePermissionRepository.AddRolePermission(rolePermission1);
-                            await _rolePermissionRepository.AddRolePermission(rolePermission2);
-                            await _rolePermissionRepository.AddRolePermission(rolePermission3);
-                            await _rolePermissionRepository.AddRolePermission(rolePermission4);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Debug(ex.ToString());
-                        ShowError(Application.Current.Resources["m_error_download"].ToString(), Constants.Error);
-                    }
-                });
-            }
-        }
-
         private void ShowError(string textError, string colorError)
         {
             TextError = textError;
@@ -169,7 +103,7 @@ namespace UIModule.ViewModels
 
                             System.Windows.Application.Current.Properties["UserName"] = Login;
                             var displayRootRegistry = (Application.Current as App).displayRootRegistry;
-                            await displayRootRegistry.ShowModalPresentation(new MainWindowViewModel());
+                            await displayRootRegistry.ShowModalPresentation(new MainWindowViewModel(_userRepository));
                             CloseAction();
                             logger.Info("The user " + user.Login + " is logged in to the app");
                         }

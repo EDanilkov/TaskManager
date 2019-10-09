@@ -20,20 +20,20 @@ namespace UIModule.ViewModels
         IRoleRepository _roleRepository;
         IUserProjectRepository _userProjectRepository;
 
-        public ProjectViewModel()
+        public ProjectViewModel(IUserRepository userRepository, ITaskRepository taskRepository, IProjectRepository projectRepository, IPermissionRepository permissionRepository, IRoleRepository roleRepository, IUserProjectRepository userProjectRepository)
         {
             Title = "Project";
 
-            _userRepository = new UserRepository();
-            _taskRepository = new TaskRepository();
-            _projectRepository = new ProjectRepository();
-            _permissionRepository = new PermissionRepository();
-            _roleRepository = new RoleRepository();
-            _userProjectRepository = new UserProjectRepository();
+            _userRepository = userRepository;
+            _taskRepository = taskRepository;
+            _projectRepository = projectRepository;
+            _permissionRepository = permissionRepository;
+            _roleRepository = roleRepository;
+            _userProjectRepository = userProjectRepository;
         }
 
         #region Properties
-        
+
 
         public ICommand AddNewTaskClick => new DelegateCommand(AddNewTask);
 
@@ -41,7 +41,7 @@ namespace UIModule.ViewModels
         {
             var view = new Pages.AddNewTask
             {
-                DataContext = new AddNewTaskViewModel()
+                DataContext = new AddNewTaskViewModel(_userRepository, _taskRepository)
             };
 
             var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
@@ -738,7 +738,7 @@ namespace UIModule.ViewModels
         {
             var view = new Pages.AddNewMember
             {
-                DataContext = new AddNewMemberViewModel()
+                DataContext = new AddNewMemberViewModel(_userRepository,_projectRepository, _roleRepository, _userProjectRepository)
             };
 
             var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);

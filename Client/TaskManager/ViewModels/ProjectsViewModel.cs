@@ -1,5 +1,4 @@
 ﻿using BusinessLogicModule.Interfaces;
-using BusinessLogicModule.Interfaces;
 using GalaSoft.MvvmLight.CommandWpf;
 using MaterialDesignThemes.Wpf;
 using NLog;
@@ -20,13 +19,13 @@ namespace UIModule.ViewModels
         IUserRepository _userRepository;
         IRoleRepository _roleRepository;
 
-        public ProjectsViewModel()
+        public ProjectsViewModel(IProjectRepository projectRepository, IUserRepository userRepository, IRoleRepository roleRepository)
         {
             Title = "Projects";
-            
-            _projectRepository = new ProjectRepository();
-            _userRepository = new UserRepository();
-            _roleRepository = new RoleRepository();
+
+            _projectRepository = projectRepository;
+            _userRepository = userRepository;
+            _roleRepository = roleRepository;
         }
 
 
@@ -308,7 +307,7 @@ namespace UIModule.ViewModels
         {
             var view = new Pages.AddNewProject
             {
-                DataContext = new AddNewProjectViewModel()
+                DataContext = new AddNewProjectViewModel(_userRepository, _projectRepository)
             };
             
             var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);

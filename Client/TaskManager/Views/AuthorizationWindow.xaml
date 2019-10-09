@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        xmlns:vm="clr-namespace:UIModule.ViewModels"
+        DataContext="{Binding AuthorizationWindowViewModel, Source={StaticResource ViewModelLocator}}"
         mc:Ignorable="d"
         Title="Login" 
         Height="500" 
@@ -13,16 +12,6 @@
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         FontFamily="Segoe UI Emoji">
-
-    <Window.DataContext>
-        <vm:AuthorizationWindowViewModel/>
-    </Window.DataContext>
-
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding Loaded}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
 
     <Grid>
         <Rectangle Style="{DynamicResource Rectangle}"/>

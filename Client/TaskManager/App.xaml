@@ -11,6 +11,7 @@
     <Application.Resources>
 
         <ResourceDictionary>
+            <local:ViewModelLocator x:Key="ViewModelLocator"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/lang.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml">
@@ -55,7 +56,6 @@
                     <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Primary100}" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
