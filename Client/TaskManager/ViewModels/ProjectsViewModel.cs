@@ -9,11 +9,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using UIModule.Utils;
 
 namespace UIModule.ViewModels
 {
     public class ProjectsViewModel : NavigateViewModel
     {
+        string _dialogIdentifier = "ProjectsDialog";
         private static Logger logger = LogManager.GetCurrentClassLogger();
         IProjectRepository _projectRepository;
         IUserRepository _userRepository;
@@ -154,7 +156,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -174,7 +176,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -195,7 +197,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(ex.Message);
+                        ErrorHandler.Show(ex.Message, _dialogIdentifier);
                     }
                     
                 });
@@ -215,7 +217,7 @@ namespace UIModule.ViewModels
                     catch(Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(ex.Message);
+                        ErrorHandler.Show(ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -241,7 +243,7 @@ namespace UIModule.ViewModels
                     catch(Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(ex.Message);
+                        ErrorHandler.Show(ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -308,13 +310,8 @@ namespace UIModule.ViewModels
                 DataContext = new AddNewProjectViewModel(_userRepository, _projectRepository)
             };
             
-            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+            var result = await DialogHost.Show(view, _dialogIdentifier);
             ListProjects = await GetRecordListBoxes();
-        }
-
-        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
-        {
-            Console.WriteLine("You can intercept the closing event, and cancel here.");
         }
         #endregion
     }

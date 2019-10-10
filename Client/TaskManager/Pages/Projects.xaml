@@ -23,7 +23,7 @@
 
 
     <materialDesign:DialogHost
-        Identifier="RootDialog"
+        Identifier="ProjectsDialog"
         CloseOnClickAway="True">
         <Grid
             Background="White">

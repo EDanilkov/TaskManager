@@ -9,7 +9,9 @@
     <v:String x:Key="MNewMember">НОВЫЙ ПОЛЬЗОВАТЕЛЬ</v:String>
     <v:String x:Key="MNewTask">НОВОЕ ЗАДАНИЕ</v:String>
     <v:String x:Key="MAccept">ПРИНЯТЬ</v:String>
+    <v:String x:Key="MOk">OK</v:String>
     <v:String x:Key="MCancel">ОТМЕНА</v:String>
+    <v:String x:Key="MError">ОШИБКА</v:String>
     <v:String x:Key="mLogin">Логин</v:String>
     <v:String x:Key="mPassword">Пароль</v:String>
     <v:String x:Key="mEnter">Войти</v:String>

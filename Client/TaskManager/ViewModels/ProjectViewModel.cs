@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using UIModule.Utils;
 
 namespace UIModule.ViewModels
 {
     public class ProjectViewModel : NavigateViewModel
     {
+        string _dialogIdentifier = "ProjectDialog";
         private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         ITaskRepository _taskRepository;
@@ -44,7 +46,7 @@ namespace UIModule.ViewModels
                 DataContext = new AddNewTaskViewModel(_userRepository, _taskRepository, _projectRepository)
             };
 
-            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+            var result = await DialogHost.Show(view, _dialogIdentifier);
             int projectId = int.Parse(System.Windows.Application.Current.Properties["ProjectId"].ToString());
             ListTasks = (await _taskRepository.GetTasksFromProject(projectId));
         }
@@ -390,7 +392,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_delete_task"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_delete_task"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -428,7 +430,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -474,7 +476,7 @@ namespace UIModule.ViewModels
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message, _dialogIdentifier);
             }
         }
 
@@ -511,7 +513,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -537,7 +539,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_delete_project"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_delete_project"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -585,12 +587,12 @@ namespace UIModule.ViewModels
                         NewMembersSourse = userInOtherProject;
                         ListMembers = await _userRepository.GetUsersFromProject(projectId);
                         MemberInfo = Visibility.Collapsed;
-                        logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " deleted user " + userName + "from the project " + (await _projectRepository.GetProject(projectId)).Name);
+                        logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " deleted user " + userName + " from the project " + (await _projectRepository.GetProject(projectId)).Name);
                     }
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_delete_member"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_delete_member"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -615,7 +617,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -646,7 +648,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_change_role"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_change_role"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -666,7 +668,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString());
+                        ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString(), _dialogIdentifier);
                     }
                 });
             }
@@ -748,18 +750,13 @@ namespace UIModule.ViewModels
                     DataContext = new AddNewMemberViewModel(_userRepository, _projectRepository, _roleRepository, _userProjectRepository)
                 };
 
-                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+                var result = await DialogHost.Show(view, _dialogIdentifier);
                 await RefreshUsers();
             }
             catch(Exception ex)
             {
                 logger.Error(ex.ToString());
             }
-        }
-
-        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
-        {
-            Console.WriteLine("You can intercept the closing event, and cancel here.");
         }
 
         #endregion

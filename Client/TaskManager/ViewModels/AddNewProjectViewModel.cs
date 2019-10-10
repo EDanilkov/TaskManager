@@ -4,14 +4,17 @@ using SharedServicesModule.Models;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using UIModule.Utils;
 
 namespace UIModule.ViewModels
 {
     class AddNewProjectViewModel : NavigateViewModel
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        string _dialogIdentifier = "AddProjectDialog";
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         IProjectRepository _projectRepository;
+
 
         public AddNewProjectViewModel(IUserRepository userRepository, IProjectRepository projectRepository)
         {
@@ -59,19 +62,18 @@ namespace UIModule.ViewModels
                                 RegistrationDate = DateTime.Now
                             };
                             await _projectRepository.AddProject(project);
-                            Navigate("Pages/Projects.xaml");
-                            logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " added project " + ProjectName);
+                            _logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " added project " + ProjectName);
                             MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                         }
                         else
                         {
-                            MessageBox.Show(Application.Current.Resources["m_correct_entry"].ToString());
+                            ErrorHandler.Show(Application.Current.Resources["m_correct_entry"].ToString(), _dialogIdentifier);
                         }
                     }
                     catch (Exception ex)
                     {
-                        logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_create_project"].ToString() + "\n" + ex.Message);
+                        _logger.Error(ex.ToString());
+                        ErrorHandler.Show(Application.Current.Resources["m_error_create_project"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }

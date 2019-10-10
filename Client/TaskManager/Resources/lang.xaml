@@ -8,7 +8,9 @@
     <v:String x:Key="MNewMember">NEW MEMBER</v:String>
     <v:String x:Key="MNewTask">NEW TASK</v:String>
     <v:String x:Key="MAccept">ACCEPT</v:String>
+    <v:String x:Key="MOk">OK</v:String>
     <v:String x:Key="MCancel">CANCEL</v:String>
+    <v:String x:Key="MError">ERROR</v:String>
     <v:String x:Key="mLogin">Login</v:String>
     <v:String x:Key="mPassword">Password</v:String>
     <v:String x:Key="mEnter">Enter</v:String>

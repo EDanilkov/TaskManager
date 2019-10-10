@@ -62,4 +62,12 @@
         <Setter Property="Foreground"  Value="#5866B8" />
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
+
+    <Style x:Key="TitleError" TargetType="TextBlock">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground"  Value="#B9240B" />
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    
 </ResourceDictionary>

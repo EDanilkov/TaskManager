@@ -3,11 +3,13 @@ using NLog;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using UIModule.Utils;
 
 namespace UIModule.ViewModels
 {
     public class MainWindowViewModel : NavigateViewModel
     {
+        string _dialogIdentifier = "MainDialog";
         private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
 
@@ -36,15 +38,7 @@ namespace UIModule.ViewModels
             {
                 return new DelegateCommand((obj) =>
                 {
-                    if(Application.Current.Properties["UserName"] != null)
-                    {
-
-                        Navigate("Pages/Profile.xaml");
-                    }
-                    else
-                    {
-                        MessageBox.Show(Application.Current.Resources["m_identify"].ToString());
-                    }
+                    Navigate("Pages/Profile.xaml");
                 });
             }
         }
@@ -55,14 +49,7 @@ namespace UIModule.ViewModels
             {
                 return new DelegateCommand((obj) =>
                 {
-                    if (Application.Current.Properties["UserName"] != null)
-                    {
-                        Navigate("Pages/Projects.xaml");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Вы не вошли в свой аккаунт");
-                    }
+                    Navigate("Pages/Projects.xaml");
                 });
             }
         }
@@ -76,10 +63,18 @@ namespace UIModule.ViewModels
             {
                 return new DelegateCommand(async (obj) =>
                 {
-                    Application.Current.Properties["UserName"] = null;
-                    var displayRootRegistry = (Application.Current as App).displayRootRegistry;
-                    await displayRootRegistry.ShowModalPresentation(new AuthorizationWindowViewModel(_userRepository));
-                    CloseAction();
+                    try
+                    {
+                        Application.Current.Properties["UserName"] = null;
+                        var displayRootRegistry = (Application.Current as App).displayRootRegistry;
+                        await displayRootRegistry.ShowModalPresentation(new AuthorizationWindowViewModel(_userRepository));
+                        CloseAction();
+                    }
+                    catch(Exception ex)
+                    {
+                        logger.Error(ex.ToString());
+                        ErrorHandler.Show(ex.Message, _dialogIdentifier);
+                    }
                 });
             }
         }

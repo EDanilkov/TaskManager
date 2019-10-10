@@ -11,6 +11,12 @@
         <Setter Property="Margin" Value="5"/>
     </Style>
 
+    <Style x:Key="Ok" BasedOn="{StaticResource MaterialDesignFlatButton}" TargetType="{x:Type Button}">
+        <Setter Property="IsDefault" Value="True"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
     <Style x:Key="Cancel" BasedOn="{StaticResource MaterialDesignFlatButton}" TargetType="{x:Type Button}">
         <Setter Property="IsCancel" Value="True"/>
         <Setter Property="Margin" Value="5"/>

@@ -7,53 +7,58 @@
              mc:Ignorable="d" 
              DataContext="{Binding AddNewProjectViewModel, Source={StaticResource ViewModelLocator}}"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Margin="15">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition 
-                Width="220"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition 
-                Height="70*"/>
-            <RowDefinition 
-                Height="30*"/>
-        </Grid.RowDefinitions>
-        <StackPanel
-            Grid.Column="0"
-            Grid.Row="0"
-            Style="{DynamicResource VerticalStackPanel}">
-            <TextBlock
-                Style="{DynamicResource TitleAddNew}"
-                Text="{DynamicResource MNewProject}"/>
-            <TextBox
-                Text="{Binding ProjectName}"
-                materialDesign:HintAssist.Hint="{DynamicResource mName}"
-                Style="{DynamicResource TextBoxNewElement}"/>
-            <TextBox
-                Text="{Binding ProjectDescription}"
-                Style="{DynamicResource TextBoxNewElement}"
-                materialDesign:HintAssist.Hint="{DynamicResource mDescription}"
-                />
-        </StackPanel>
-        <Grid
-            Margin="0 10 0 0"
-            Grid.Row="1">
+
+    <materialDesign:DialogHost
+        Identifier="AddProjectDialog"
+        CloseOnClickAway="True">
+        <Grid Margin="15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition 
-                    Width="*"/>
-                <ColumnDefinition 
-                    Width="*"/>
+                    Width="220"/>
             </Grid.ColumnDefinitions>
-            <Button
+            <Grid.RowDefinitions>
+                <RowDefinition 
+                    Height="70*"/>
+                <RowDefinition 
+                    Height="30*"/>
+            </Grid.RowDefinitions>
+            <StackPanel
                 Grid.Column="0"
-                Style="{DynamicResource Accept}"
-                Command="{Binding Accept}"
-                Content="{DynamicResource MAccept}"/>
-            <Button
-                Grid.Column="1"
-                Style="{DynamicResource Cancel}"
-                Command="materialDesign:DialogHost.CloseDialogCommand"
-                Content="{DynamicResource MCancel}"/>
+                Grid.Row="0"
+                Style="{DynamicResource VerticalStackPanel}">
+                <TextBlock
+                    Style="{DynamicResource TitleAddNew}"
+                    Text="{DynamicResource MNewProject}"/>
+                <TextBox
+                    Text="{Binding ProjectName}"
+                    materialDesign:HintAssist.Hint="{DynamicResource mName}"
+                    Style="{DynamicResource TextBoxNewElement}"/>
+                <TextBox
+                    Text="{Binding ProjectDescription}"
+                    Style="{DynamicResource TextBoxNewElement}"
+                    materialDesign:HintAssist.Hint="{DynamicResource mDescription}"
+                    />
+            </StackPanel>
+            <Grid
+                Margin="0 10 0 0"
+                Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition 
+                        Width="*"/>
+                    <ColumnDefinition 
+                        Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Style="{DynamicResource Accept}"
+                    Command="{Binding Accept}"
+                    Content="{DynamicResource MAccept}"/>
+                <Button
+                    Grid.Column="1"
+                    Style="{DynamicResource Cancel}"
+                    Command="materialDesign:DialogHost.CloseDialogCommand"
+                    Content="{DynamicResource MCancel}"/>
+            </Grid>
         </Grid>
-    </Grid>
+    </materialDesign:DialogHost>
 </UserControl>

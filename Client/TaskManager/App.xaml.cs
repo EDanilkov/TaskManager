@@ -6,6 +6,7 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
+using UIModule.Utils;
 using UIModule.ViewModels;
 using UIModule.Views;
 
@@ -50,7 +51,7 @@ namespace UIModule
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            DI.IocKernel.Initialize(new DI.IocConfiguration());
+            IocKernel.Initialize(new IocConfiguration());
 
             base.OnStartup(e);
 

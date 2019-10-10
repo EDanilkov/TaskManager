@@ -127,8 +127,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DI\IocConfiguration.cs" />
-    <Compile Include="DI\IocKernel.cs" />
+    <Compile Include="Utils\ErrorHandler.cs" />
+    <Compile Include="Utils\IocConfiguration.cs" />
+    <Compile Include="Utils\IocKernel.cs" />
     <Compile Include="Pages\AddNewMember.xaml.cs">
       <DependentUpon>AddNewMember.xaml</DependentUpon>
     </Compile>
@@ -140,6 +141,9 @@
     </Compile>
     <Compile Include="Pages\ChangeTask.xaml.cs">
       <DependentUpon>ChangeTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Error.xaml.cs">
+      <DependentUpon>Error.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
@@ -159,6 +163,7 @@
     <Compile Include="ViewModels\AuthorizationWindowViewModel.cs" />
     <Compile Include="ViewModels\ChangeTaskViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
+    <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NavigateViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
@@ -189,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ChangeTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Error.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

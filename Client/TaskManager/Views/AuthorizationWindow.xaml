@@ -13,45 +13,49 @@
         WindowStartupLocation="CenterScreen" 
         FontFamily="Segoe UI Emoji">
 
-    <Grid>
-        <Rectangle Style="{DynamicResource Rectangle}"/>
-        <Rectangle Style="{DynamicResource CenterRectangle}"/>
+    <materialDesign:DialogHost
+        Identifier="AuthorizationDialog"
+        CloseOnClickAway="True">
+        <Grid>
+            <Rectangle Style="{DynamicResource Rectangle}"/>
+            <Rectangle Style="{DynamicResource CenterRectangle}"/>
 
-        <Grid 
-            Style="{DynamicResource Authorization}">
-            <Label 
-                Content="LOGIN" 
-                Style="{DynamicResource Login}"/>
-            <StackPanel
-                Style="{DynamicResource LoginStackPanel}">
-                <TextBlock 
-                    Style="{DynamicResource Error}"
-                    Text="{Binding TextError}"
-                    Foreground="{Binding ColorError}"
-                    Visibility="{Binding VisibilityError}"/>
-                <TextBox 
-                    x:Name="Login"
-                    Text="{Binding Login}" 
-                    Style="{DynamicResource LoginTextBox}"
-                    materialDesign:HintAssist.Hint="{DynamicResource mLogin}" />
-                <PasswordBox 
-                    Name="Logpass"  
-                    Style="{DynamicResource PasswordTextBox}"
-                    materialDesign:HintAssist.Hint="{DynamicResource mPassword}"/>
-            </StackPanel>
+            <Grid 
+                Style="{DynamicResource Authorization}">
+                <Label 
+                    Content="LOGIN" 
+                    Style="{DynamicResource Login}"/>
+                <StackPanel
+                    Style="{DynamicResource LoginStackPanel}">
+                    <TextBlock 
+                        Style="{DynamicResource Error}"
+                        Text="{Binding TextError}"
+                        Foreground="{Binding ColorError}"
+                        Visibility="{Binding VisibilityError}"/>
+                    <TextBox 
+                        x:Name="Login"
+                        Text="{Binding Login}" 
+                        Style="{DynamicResource LoginTextBox}"
+                        materialDesign:HintAssist.Hint="{DynamicResource mLogin}" />
+                    <PasswordBox 
+                        Name="Logpass"  
+                        Style="{DynamicResource PasswordTextBox}"
+                        materialDesign:HintAssist.Hint="{DynamicResource mPassword}"/>
+                </StackPanel>
+            </Grid>
+            <Button
+                Style="{DynamicResource Enter}"
+                Command="{Binding Enter}" 
+                CommandParameter="{Binding ElementName=Logpass}"
+                Content="{DynamicResource mEnter}"/>
+            <Button 
+                Style="{DynamicResource Register}"
+                Content="{DynamicResource m_register}" 
+                Command="{Binding Registration}"
+                CommandParameter="{Binding ElementName=Logpass}"/>
+            <materialDesign:PackIcon 
+                Style="{DynamicResource AccountIcon}"
+                Kind="AccountTie" />
         </Grid>
-        <Button
-            Style="{DynamicResource Enter}"
-            Command="{Binding Enter}" 
-            CommandParameter="{Binding ElementName=Logpass}"
-            Content="{DynamicResource mEnter}"/>
-        <Button 
-            Style="{DynamicResource Register}"
-            Content="{DynamicResource m_register}" 
-            Command="{Binding Registration}"
-            CommandParameter="{Binding ElementName=Logpass}"/>
-        <materialDesign:PackIcon 
-            Style="{DynamicResource AccountIcon}"
-            Kind="AccountTie" />
-    </Grid>
+    </materialDesign:DialogHost>
 </Window>

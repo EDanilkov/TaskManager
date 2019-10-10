@@ -17,7 +17,7 @@
     </i:Interaction.Triggers>
 
     <materialDesign:DialogHost
-        Identifier="ChangeTaskDialog"
+        Identifier="TaskDialog"
         CloseOnClickAway="True">
         <Grid 
             Background="White">

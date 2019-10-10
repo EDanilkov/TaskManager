@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="UIModule.Pages.Error"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:vm="clr-namespace:UIModule.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.DataContext>
+        <vm:ErrorViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition 
+                Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition 
+                Height="70*"/>
+            <RowDefinition 
+                Height="30*"/>
+        </Grid.RowDefinitions>
+        <StackPanel
+            Grid.Column="0"
+            Grid.Row="0"
+            Style="{DynamicResource VerticalStackPanel}">
+            <TextBlock
+                Style="{DynamicResource TitleError}"
+                Text="{DynamicResource MError}"/>
+            <TextBlock
+                Grid.Column="1"
+                Text="{Binding ErrorText}"
+                Style="{DynamicResource Error}">
+            </TextBlock>
+        </StackPanel>
+        <Grid
+            Grid.Row="1">
+            <Button
+                Grid.Column="0"
+                Style="{DynamicResource Ok}"
+                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                Content="{DynamicResource MOk}"/>
+        </Grid>
+    </Grid>
+</UserControl>

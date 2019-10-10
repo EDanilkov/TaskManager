@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using UIModule.Utils;
 
 namespace UIModule.ViewModels
 {
     public class AddNewTaskViewModel : NavigateViewModel
     {
+        string _dialogIdentifier = "AddTaskDialog";
         private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         ITaskRepository _taskRepository;
@@ -112,7 +114,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -140,20 +142,19 @@ namespace UIModule.ViewModels
                             };
 
                             await _taskRepository.AddTask(task);
-                            Navigate("Pages/Project.xaml");
                             logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " added task " + TaskName + " to the project " + (await _projectRepository.GetProject(projectId)).Name);
                             MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                         }
                         else
                         {
-                            MessageBox.Show(Application.Current.Resources["m_correct_entry"].ToString());
+                            ErrorHandler.Show(Application.Current.Resources["m_correct_entry"].ToString(), _dialogIdentifier);
                         }
 
                     }
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_create_task"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_create_task"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }

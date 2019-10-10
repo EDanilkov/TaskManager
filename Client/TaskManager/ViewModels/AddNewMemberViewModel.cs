@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using UIModule.Utils;
 
 namespace UIModule.ViewModels
 {
     class AddNewMemberViewModel : NavigateViewModel
     {
+        string _dialogIdentifier = "AddMemberDialog";
         private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         IProjectRepository _projectRepository;
@@ -154,7 +156,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     { 
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -174,20 +176,19 @@ namespace UIModule.ViewModels
                             Project project = await _projectRepository.GetProject(projectId);
                             UserProject userProject = new UserProject() { UserId = SelectedNewMember.Id, ProjectId = project.Id, RoleId = SelectedRole.Id };
                             await _userProjectRepository.AddUserProject(userProject);
-                            Navigate("Pages/Project.xaml");
 
                             logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " added user " + SelectedNewMember.Login + " to the project " + project.Name + " with the " + SelectedRole.Name + " role");
                             MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                         }
                         else
                         {
-                            MessageBox.Show(Application.Current.Resources["m_correct_entry"].ToString());
+                            ErrorHandler.Show(Application.Current.Resources["m_correct_entry"].ToString(), _dialogIdentifier);
                         }
                     }
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_add_user"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_add_user"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -207,7 +208,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }

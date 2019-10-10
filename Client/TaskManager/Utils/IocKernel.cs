@@ -1,7 +1,7 @@
 ﻿using Ninject;
 using Ninject.Modules;
 
-namespace UIModule.DI
+namespace UIModule.Utils
 {
     public static class IocKernel
     {

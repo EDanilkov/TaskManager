@@ -1,50 +1,52 @@
-﻿namespace UIModule.ViewModels
+﻿using UIModule.Utils;
+
+namespace UIModule.ViewModels
 {
     class ViewModelLocator
     {
         public AddNewMemberViewModel AddNewMemberViewModel
         {
-            get { return DI.IocKernel.Get<AddNewMemberViewModel>(); } 
+            get { return IocKernel.Get<AddNewMemberViewModel>(); } 
         }
 
         public AddNewProjectViewModel AddNewProjectViewModel
         {
-            get { return DI.IocKernel.Get<AddNewProjectViewModel>(); } 
+            get { return IocKernel.Get<AddNewProjectViewModel>(); } 
         }
 
         public AddNewTaskViewModel AddNewTaskViewModel
         {
-            get { return DI.IocKernel.Get<AddNewTaskViewModel>(); }
+            get { return IocKernel.Get<AddNewTaskViewModel>(); }
         }
 
         public AuthorizationWindowViewModel AuthorizationWindowViewModel
         {
-            get { return DI.IocKernel.Get<AuthorizationWindowViewModel>(); }
+            get { return IocKernel.Get<AuthorizationWindowViewModel>(); }
         }
 
         public ChangeTaskViewModel ChangeTaskViewModel
         {
-            get { return DI.IocKernel.Get<ChangeTaskViewModel>(); }
+            get { return IocKernel.Get<ChangeTaskViewModel>(); }
         }
 
         public ProfileViewModel ProfileViewModel
         {
-            get { return DI.IocKernel.Get<ProfileViewModel>(); }
+            get { return IocKernel.Get<ProfileViewModel>(); }
         }
 
         public ProjectsViewModel ProjectsViewModel
         {
-            get { return DI.IocKernel.Get<ProjectsViewModel>(); } 
+            get { return IocKernel.Get<ProjectsViewModel>(); } 
         }
 
         public ProjectViewModel ProjectViewModel
         {
-            get { return DI.IocKernel.Get<ProjectViewModel>(); }
+            get { return IocKernel.Get<ProjectViewModel>(); }
         }
 
         public TaskViewModel TaskViewModel
         {
-            get { return DI.IocKernel.Get<TaskViewModel>(); }
+            get { return IocKernel.Get<TaskViewModel>(); }
         }
     }
 }

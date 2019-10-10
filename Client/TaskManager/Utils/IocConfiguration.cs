@@ -1,7 +1,7 @@
 ﻿using BusinessLogicModule.Interfaces;
 using Ninject.Modules;
 
-namespace UIModule.DI
+namespace UIModule.Utils
 {
     class IocConfiguration : NinjectModule
     {

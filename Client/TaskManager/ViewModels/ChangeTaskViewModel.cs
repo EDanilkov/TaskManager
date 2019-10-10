@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using UIModule.Utils;
 
 namespace UIModule.ViewModels
 {
     public class ChangeTaskViewModel : NavigateViewModel
     {
+        string _dialogIdentifier = "ChangeTaskDialog";
         private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         ITaskRepository _taskRepository;
@@ -112,7 +114,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -131,15 +133,14 @@ namespace UIModule.ViewModels
                         
                         Task task = (await _taskRepository.GetTasks()).Find(c => c.Id == taskId);
                         await _taskRepository.ChangeTask(task, TaskName, TaskDescription, SelectedUser.Id, TaskFinishDate);
-
-                        Navigate("Pages/Task.xaml");
+                        
                         logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " changed task " + TaskName + " to the project " + _projectRepository.GetProject(projectId));
                         MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                     }
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_change_task"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_change_task"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }

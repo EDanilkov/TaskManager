@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using UIModule.Utils;
 
 namespace UIModule.ViewModels
 {
     public class TaskViewModel : NavigateViewModel
     {
+        string _dialogIdentifier = "TaskDialog";
         private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         ITaskRepository _taskRepository;
@@ -163,7 +165,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -182,7 +184,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(ex.Message);
+                        ErrorHandler.Show(ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -201,7 +203,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(ex.Message);
+                        ErrorHandler.Show(ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -220,7 +222,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(ex.Message);
+                        ErrorHandler.Show(ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -239,7 +241,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(ex.Message);
+                        ErrorHandler.Show(ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -258,7 +260,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(ex.Message);
+                        ErrorHandler.Show(ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -277,7 +279,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(ex.Message);
+                        ErrorHandler.Show(ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -311,7 +313,7 @@ namespace UIModule.ViewModels
                     catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
-                        MessageBox.Show(Application.Current.Resources["m_error_delete_task"].ToString() + "\n" + ex.Message);
+                        ErrorHandler.Show(Application.Current.Resources["m_error_delete_task"].ToString() + "\n" + ex.Message, _dialogIdentifier);
                     }
                 });
             }
@@ -326,7 +328,7 @@ namespace UIModule.ViewModels
                 DataContext = new ChangeTaskViewModel(_userRepository, _taskRepository, _projectRepository)
             };
 
-            var result = await DialogHost.Show(view, "ChangeTaskDialog", ClosingEventHandler);
+            var result = await DialogHost.Show(view, _dialogIdentifier);
             
             string userName = System.Windows.Application.Current.Properties["UserName"].ToString();
             int taskId = int.Parse(System.Windows.Application.Current.Properties["TaskId"].ToString());
@@ -340,11 +342,6 @@ namespace UIModule.ViewModels
             UserName = ": " + (await _userRepository.GetUser(id: task.UserId)).Login;
             TaskDescriprion = task.Description;
             TaskFinishDate = ": " + task.EndDate.ToShortDateString();
-        }
-
-        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
-        {
-            Console.WriteLine("You can intercept the closing event, and cancel here.");
         }
     }
 }

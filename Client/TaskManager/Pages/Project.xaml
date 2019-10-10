@@ -20,7 +20,7 @@
     </i:Interaction.Triggers>
 
     <materialDesign:DialogHost
-        Identifier="RootDialog"
+        Identifier="ProjectDialog"
         CloseOnClickAway="True">
         <Grid 
             Background="White">

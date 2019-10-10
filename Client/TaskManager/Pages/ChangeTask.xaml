@@ -13,68 +13,73 @@
             <i:InvokeCommandAction Command="{Binding Loaded}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid Margin="15">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition 
-                Width="180"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition 
-                Height="70*"/>
-            <RowDefinition 
-                Height="30*"/>
-        </Grid.RowDefinitions>
-        <StackPanel
-            Grid.Column="0"
-            Grid.Row="0"
-            Orientation="Vertical">
-            <TextBlock
-                Foreground="#5866B8"
-                HorizontalAlignment="Center"
-                FontWeight="Bold"
-                Text="CHANGE TASK"/>
-            <TextBox
-                Text="{Binding TaskName}"
-                materialDesign:HintAssist.Hint="Name"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                MaxHeight="100"
-                TextWrapping="Wrap"
-                Margin="5"/>
-            <TextBox
-                Text="{Binding TaskDescription}"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                materialDesign:HintAssist.Hint="Description"
-                MaxHeight="100"
-                TextWrapping="Wrap"
-                Margin="5"/>
-            <ComboBox 
-                materialDesign:HintAssist.Hint="{DynamicResource mForUser}"
-                ItemsSource="{Binding Users}"
-                DisplayMemberPath="Login"
-                Margin="5"
-                SelectedValue="{Binding SelectedUser}"/>
-            <DatePicker 
-                Margin="5"
-                DisplayDateStart="{Binding StartDay}"
-                materialDesign:HintAssist.Hint="{DynamicResource mEndDate}"
-                SelectedDate="{Binding TaskFinishDate}"/>
-        </StackPanel>
-        <StackPanel
-            Grid.Row="1"
-            Orientation="Horizontal"
-            HorizontalAlignment="Right">
-            <Button
-                Style="{StaticResource MaterialDesignFlatButton}"
-                Command="{Binding Change}"
-                IsDefault="True"
-                Margin="5"
-                Content="ACCEPT"/>
-            <Button
-                Style="{StaticResource MaterialDesignFlatButton}"
-                IsCancel="True"
-                Margin="5"
-                Command="materialDesign:DialogHost.CloseDialogCommand"
-                Content="CANCEL"/>
-        </StackPanel>
-    </Grid>
+
+    <materialDesign:DialogHost
+        Identifier="ChangeTaskDialog"
+        CloseOnClickAway="True">
+        <Grid Margin="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition 
+                    Width="180"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition 
+                    Height="70*"/>
+                <RowDefinition 
+                    Height="30*"/>
+            </Grid.RowDefinitions>
+            <StackPanel
+                Grid.Column="0"
+                Grid.Row="0"
+                Orientation="Vertical">
+                <TextBlock
+                    Foreground="#5866B8"
+                    HorizontalAlignment="Center"
+                    FontWeight="Bold"
+                    Text="CHANGE TASK"/>
+                <TextBox
+                    Text="{Binding TaskName}"
+                    materialDesign:HintAssist.Hint="Name"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    MaxHeight="100"
+                    TextWrapping="Wrap"
+                    Margin="5"/>
+                <TextBox
+                    Text="{Binding TaskDescription}"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    materialDesign:HintAssist.Hint="Description"
+                    MaxHeight="100"
+                    TextWrapping="Wrap"
+                    Margin="5"/>
+                <ComboBox 
+                    materialDesign:HintAssist.Hint="{DynamicResource mForUser}"
+                    ItemsSource="{Binding Users}"
+                    DisplayMemberPath="Login"
+                    Margin="5"
+                    SelectedValue="{Binding SelectedUser}"/>
+                <DatePicker 
+                    Margin="5"
+                    DisplayDateStart="{Binding StartDay}"
+                    materialDesign:HintAssist.Hint="{DynamicResource mEndDate}"
+                    SelectedDate="{Binding TaskFinishDate}"/>
+            </StackPanel>
+            <StackPanel
+                Grid.Row="1"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right">
+                <Button
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Command="{Binding Change}"
+                    IsDefault="True"
+                    Margin="5"
+                    Content="ACCEPT"/>
+                <Button
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    IsCancel="True"
+                    Margin="5"
+                    Command="materialDesign:DialogHost.CloseDialogCommand"
+                    Content="CANCEL"/>
+            </StackPanel>
+        </Grid>
+    </materialDesign:DialogHost>
 </UserControl>
