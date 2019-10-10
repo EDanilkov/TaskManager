@@ -162,7 +162,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -179,10 +179,10 @@ namespace UIModule.ViewModels
                     {
                         UnderlineProjects = TextDecorations.Underline;
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        logger.Debug(e.ToString());
-                        MessageBox.Show(e.Message);
+                        logger.Error(ex.ToString());
+                        MessageBox.Show(ex.Message);
                     }
                 });
             }
@@ -198,10 +198,10 @@ namespace UIModule.ViewModels
                     {
                         UnderlineProject = TextDecorations.Underline;
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        logger.Debug(e.ToString());
-                        MessageBox.Show(e.Message);
+                        logger.Error(ex.ToString());
+                        MessageBox.Show(ex.Message);
                     }
                 });
             }
@@ -217,10 +217,10 @@ namespace UIModule.ViewModels
                     {
                         UnderlineProjects = null;
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        logger.Debug(e.ToString());
-                        MessageBox.Show(e.Message);
+                        logger.Error(ex.ToString());
+                        MessageBox.Show(ex.Message);
                     }
                 });
             }
@@ -236,10 +236,10 @@ namespace UIModule.ViewModels
                     {
                         UnderlineProject = null;
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        logger.Debug(e.ToString());
-                        MessageBox.Show(e.Message);
+                        logger.Error(ex.ToString());
+                        MessageBox.Show(ex.Message);
                     }
                 });
             }
@@ -255,10 +255,10 @@ namespace UIModule.ViewModels
                     {
                         Navigate("Pages/Projects.xaml");
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        logger.Debug(e.ToString());
-                        MessageBox.Show(e.Message);
+                        logger.Error(ex.ToString());
+                        MessageBox.Show(ex.Message);
                     }
                 });
             }
@@ -274,10 +274,10 @@ namespace UIModule.ViewModels
                     {
                         Navigate("Pages/Project.xaml");
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        logger.Debug(e.ToString());
-                        MessageBox.Show(e.Message);
+                        logger.Error(ex.ToString());
+                        MessageBox.Show(ex.Message);
                     }
                 });
             }
@@ -302,12 +302,15 @@ namespace UIModule.ViewModels
                 {
                     try
                     {
+                        int projectId = int.Parse(Application.Current.Properties["TaskId"].ToString());
+                        string taskName = (await _taskRepository.GetTask(int.Parse(Application.Current.Properties["TaskId"].ToString()))).Name;
                         await _taskRepository.DeleteTask(int.Parse(System.Windows.Application.Current.Properties["TaskId"].ToString()));
                         Navigate("Pages/Project.xaml");
+                        logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " deleted task " + taskName + " to the project " + (await _projectRepository.GetProject(int.Parse(Application.Current.Properties["ProjectId"].ToString()))).Name);
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_delete_task"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -320,7 +323,7 @@ namespace UIModule.ViewModels
         {
             var view = new Pages.ChangeTask
             {
-                DataContext = new ChangeTaskViewModel(_userRepository, _taskRepository)
+                DataContext = new ChangeTaskViewModel(_userRepository, _taskRepository, _projectRepository)
             };
 
             var result = await DialogHost.Show(view, "ChangeTaskDialog", ClosingEventHandler);

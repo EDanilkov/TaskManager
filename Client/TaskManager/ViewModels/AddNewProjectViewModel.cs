@@ -60,6 +60,7 @@ namespace UIModule.ViewModels
                             };
                             await _projectRepository.AddProject(project);
                             Navigate("Pages/Projects.xaml");
+                            logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " added project " + ProjectName);
                             MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                         }
                         else
@@ -69,7 +70,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_create_project"].ToString() + "\n" + ex.Message);
                     }
                 });

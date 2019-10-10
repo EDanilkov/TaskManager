@@ -25,6 +25,8 @@ namespace UIModule.ViewModels
             _userProjectRepository = userProjectRepository;
         }
 
+        #region Properties
+
         private Role _selectedRole;
         public Role SelectedRole
         {
@@ -113,6 +115,10 @@ namespace UIModule.ViewModels
             }
         }
 
+        #endregion
+
+        #region Methods
+
         public ICommand ComboBoxNewMembersChanged
         {
             get
@@ -146,8 +152,8 @@ namespace UIModule.ViewModels
                         NewMembersSourse = userInOtherProject.Where(p => p.Login.Contains(ComboBoxNewMembersText)).ToList();
                     }
                     catch (Exception ex)
-                    {
-                        logger.Debug(ex.ToString());
+                    { 
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -169,6 +175,8 @@ namespace UIModule.ViewModels
                             UserProject userProject = new UserProject() { UserId = SelectedNewMember.Id, ProjectId = project.Id, RoleId = SelectedRole.Id };
                             await _userProjectRepository.AddUserProject(userProject);
                             Navigate("Pages/Project.xaml");
+
+                            logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " added user " + SelectedNewMember.Login + " to the project " + project.Name + " with the " + SelectedRole.Name + " role");
                             MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                         }
                         else
@@ -178,7 +186,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_add_user"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -198,7 +206,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -232,5 +240,7 @@ namespace UIModule.ViewModels
             NewMembersSourse = userInOtherProject;
             ListMembers = await _userRepository.GetUsersFromProject(projectId);
         }
+
+        #endregion
     }
 }

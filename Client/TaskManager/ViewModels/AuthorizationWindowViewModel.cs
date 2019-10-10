@@ -104,8 +104,8 @@ namespace UIModule.ViewModels
                             System.Windows.Application.Current.Properties["UserName"] = Login;
                             var displayRootRegistry = (Application.Current as App).displayRootRegistry;
                             await displayRootRegistry.ShowModalPresentation(new MainWindowViewModel(_userRepository));
+                            logger.Debug("The user " + user.Login + " is logged in to the app");
                             CloseAction();
-                            logger.Info("The user " + user.Login + " is logged in to the app");
                         }
                         else
                         {
@@ -114,7 +114,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         ShowError(Application.Current.Resources["m_error_enter"].ToString() + "\n" + ex.Message, Constants.Error);
                     }
                 });
@@ -138,6 +138,7 @@ namespace UIModule.ViewModels
                                 User user = new User() { Login = Login, Password = password, RegistrationDate = DateTime.Now };
                                 await _userRepository.AddUser(user);
                                 ShowError(Application.Current.Resources["m_success_registered"].ToString(), Constants.Success);
+                                logger.Debug("The user " + user.Login + " is registered");
                             }
                             else
                             {
@@ -151,7 +152,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         ShowError(Application.Current.Resources["m_error_add_user"].ToString(), Constants.Error);
                     }
                 });

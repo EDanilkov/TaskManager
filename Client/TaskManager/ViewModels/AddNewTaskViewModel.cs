@@ -13,13 +13,17 @@ namespace UIModule.ViewModels
         private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         ITaskRepository _taskRepository;
+        IProjectRepository _projectRepository;
 
 
-        public AddNewTaskViewModel(IUserRepository userRepository, ITaskRepository taskRepository)
+        public AddNewTaskViewModel(IUserRepository userRepository, ITaskRepository taskRepository, IProjectRepository projectRepository)
         {
             _userRepository = userRepository;
             _taskRepository = taskRepository;
+            _projectRepository = projectRepository;
         }
+
+        #region Properties
 
         private string _taskName;
         public string TaskName
@@ -87,7 +91,9 @@ namespace UIModule.ViewModels
             }
         }
 
+        #endregion
 
+        #region Methods
 
         public ICommand Loaded
         {
@@ -105,7 +111,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -122,18 +128,20 @@ namespace UIModule.ViewModels
                     {
                         if(TaskName != null && TaskDescription != null && SelectedUser != null && TaskFinishDate != null)
                         {
+                            int projectId = int.Parse(System.Windows.Application.Current.Properties["ProjectId"].ToString());
                             Task task = new Task()
                             {
                                 Name = TaskName,
                                 Description = TaskDescription,
                                 BeginDate = DateTime.Now,
-                                ProjectId = int.Parse(System.Windows.Application.Current.Properties["ProjectId"].ToString()),
+                                ProjectId = projectId,
                                 UserId = SelectedUser.Id,
                                 EndDate = TaskFinishDate
                             };
 
                             await _taskRepository.AddTask(task);
                             Navigate("Pages/Project.xaml");
+                            logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " added task " + TaskName + " to the project " + (await _projectRepository.GetProject(projectId)).Name);
                             MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                         }
                         else
@@ -144,7 +152,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_create_task"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -161,5 +169,7 @@ namespace UIModule.ViewModels
                 });
             }
         }
+
+        #endregion
     }
 }

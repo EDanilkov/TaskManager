@@ -13,11 +13,15 @@ namespace UIModule.ViewModels
         private static Logger logger = LogManager.GetCurrentClassLogger();
         IUserRepository _userRepository;
         ITaskRepository _taskRepository;
+        IProjectRepository _projectRepository;
 
-        public ChangeTaskViewModel(IUserRepository userRepository, ITaskRepository taskRepository)
+        #region Properties
+
+        public ChangeTaskViewModel(IUserRepository userRepository, ITaskRepository taskRepository, IProjectRepository projectRepository)
         {
             _userRepository = userRepository;
             _taskRepository = taskRepository;
+            _projectRepository = projectRepository;
         }
 
         private string _taskName;
@@ -87,6 +91,10 @@ namespace UIModule.ViewModels
             }
         }
 
+        #endregion
+
+        #region Methods
+
         public ICommand Loaded
         {
             get
@@ -103,7 +111,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -125,11 +133,12 @@ namespace UIModule.ViewModels
                         await _taskRepository.ChangeTask(task, TaskName, TaskDescription, SelectedUser.Id, TaskFinishDate);
 
                         Navigate("Pages/Task.xaml");
+                        logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " changed task " + TaskName + " to the project " + _projectRepository.GetProject(projectId));
                         MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_change_task"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -146,5 +155,7 @@ namespace UIModule.ViewModels
                 });
             }
         }
+
+        #endregion
     }
 }

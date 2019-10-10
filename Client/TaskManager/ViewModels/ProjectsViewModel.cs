@@ -118,9 +118,7 @@ namespace UIModule.ViewModels
                 OnPropertyChanged();
             }
         }
-
-
-
+        
         #endregion
 
         #region Methods
@@ -155,7 +153,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -175,7 +173,7 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        logger.Debug(ex.ToString());
+                        logger.Error(ex.ToString());
                         MessageBox.Show(Application.Current.Resources["m_error_download"].ToString() + "\n" + ex.Message);
                     }
                 });
@@ -196,8 +194,8 @@ namespace UIModule.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        logger.Error(ex.ToString());
                         MessageBox.Show(ex.Message);
-                        logger.Debug(ex.ToString());
                     }
                     
                 });
@@ -216,8 +214,8 @@ namespace UIModule.ViewModels
                     }
                     catch(Exception ex)
                     {
+                        logger.Error(ex.ToString());
                         MessageBox.Show(ex.Message);
-                        logger.Debug(ex.ToString());
                     }
                 });
             }
@@ -242,8 +240,8 @@ namespace UIModule.ViewModels
                     }
                     catch(Exception ex)
                     {
+                        logger.Error(ex.ToString());
                         MessageBox.Show(ex.Message);
-                        logger.Debug(ex.ToString());
                     }
                 });
             }
