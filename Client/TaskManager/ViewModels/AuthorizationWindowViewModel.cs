@@ -14,7 +14,7 @@ namespace UIModule.ViewModels
 {
     public class AuthorizationWindowViewModel : NavigateViewModel
     {
-        string _dialogIdentifier = "AuthorizationDialog";
+        private string _dialogIdentifier = "AuthorizationDialog";
         private static Logger logger = LogManager.GetCurrentClassLogger();
         public static Action CloseAction { get; set; }
         IUserRepository _userRepository;

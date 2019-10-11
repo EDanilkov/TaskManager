@@ -1,6 +1,6 @@
 ﻿namespace UIModule.ViewModels
 {
-    class ErrorViewModel : NavigateViewModel
+    public class ErrorViewModel : NavigateViewModel
     {
         public ErrorViewModel()
         {
@@ -11,13 +11,13 @@
             ErrorText = errorText;
         }
 
-        private string _taskName;
+        private string _errorText;
         public string ErrorText
         {
-            get { return _taskName; }
+            get { return _errorText; }
             set
             {
-                _taskName = value;
+                _errorText = value;
                 OnPropertyChanged();
             }
         }

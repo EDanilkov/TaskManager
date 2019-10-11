@@ -9,6 +9,8 @@
     <v:String x:Key="MNewMember">НОВЫЙ ПОЛЬЗОВАТЕЛЬ</v:String>
     <v:String x:Key="MNewTask">НОВОЕ ЗАДАНИЕ</v:String>
     <v:String x:Key="MAccept">ПРИНЯТЬ</v:String>
+    <v:String x:Key="MChangeTask">ИЗМЕНИТЬ ЗАДАЧУ</v:String>
+    <v:String x:Key="MConfirm">ПОДТВЕРЖДЕНИЕ</v:String>
     <v:String x:Key="MOk">OK</v:String>
     <v:String x:Key="MCancel">ОТМЕНА</v:String>
     <v:String x:Key="MError">ОШИБКА</v:String>
@@ -20,6 +22,7 @@
     <v:String x:Key="mPersonal">Личные</v:String>
     <v:String x:Key="mFilterByName">Фильтр по имени...</v:String>
     <v:String x:Key="mNoPersonalProjects">У этого пользователя нет никаких личных проектов</v:String>
+    <v:String x:Key="mNoTasks">У Вас нет никаких задач</v:String>
     <v:String x:Key="mProjects">ПРОЕКТЫ</v:String>
     <v:String x:Key="mTasks">Задачи</v:String>
     <v:String x:Key="mDescription">Описание</v:String>

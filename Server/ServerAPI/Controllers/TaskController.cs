@@ -21,12 +21,12 @@ namespace ServerAPI.Controllers
         }
 
         [HttpPost("new")]
-        public IActionResult AddTask([FromBody]Data.Models.Task task)
+        public async Task<IActionResult> AddTask([FromBody]Data.Models.Task task)
         {
             NewResponseModel newTaskResponseModel = new NewResponseModel();
             try
             {
-                _db.AddTask(task);
+                await _db.AddTask(task);
                 newTaskResponseModel.Message = "Success !!!";
                 newTaskResponseModel.CreatedId = task.Id;
                 return Ok(newTaskResponseModel);

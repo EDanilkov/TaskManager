@@ -259,7 +259,7 @@
                                         <ComboBox 
                                             Grid.Column="1"
                                             Style="{DynamicResource Roles}"
-                                            SelectedValue="{Binding SelectedChangeRole}"
+                                            SelectedValue="{Binding SelectedChangeRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Text="{Binding ComboBoxChangeRoleText}"
                                             ItemsSource="{Binding RoleSourse}"
                                             DisplayMemberPath="Name">

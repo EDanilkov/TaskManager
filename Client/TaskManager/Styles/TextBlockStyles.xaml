@@ -69,5 +69,10 @@
         <Setter Property="Foreground"  Value="#B9240B" />
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
+
+    <Style x:Key="Confirm" TargetType="TextBlock">
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="TextWrapping"  Value="Wrap" />
+    </Style>
     
 </ResourceDictionary>

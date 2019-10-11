@@ -7,7 +7,7 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              DataContext="{Binding ChangeTaskViewModel, Source={StaticResource ViewModelLocator}}"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="350" d:DesignWidth="350">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Loaded}"/>
@@ -20,7 +20,7 @@
         <Grid Margin="15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition 
-                    Width="180"/>
+                    Width="220"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition 
@@ -33,53 +33,48 @@
                 Grid.Row="0"
                 Orientation="Vertical">
                 <TextBlock
-                    Foreground="#5866B8"
-                    HorizontalAlignment="Center"
-                    FontWeight="Bold"
-                    Text="CHANGE TASK"/>
+                    Style="{DynamicResource TitleAddNew}"
+                    Text="{DynamicResource MChangeTask}"/>
                 <TextBox
                     Text="{Binding TaskName}"
-                    materialDesign:HintAssist.Hint="Name"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    MaxHeight="100"
-                    TextWrapping="Wrap"
-                    Margin="5"/>
+                    materialDesign:HintAssist.Hint="{DynamicResource mName}"
+                    Style="{DynamicResource TextBoxNewElement}"/>
                 <TextBox
                     Text="{Binding TaskDescription}"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    materialDesign:HintAssist.Hint="Description"
-                    MaxHeight="100"
-                    TextWrapping="Wrap"
-                    Margin="5"/>
+                    Style="{DynamicResource TextBoxNewElement}"
+                    materialDesign:HintAssist.Hint="{DynamicResource mDescription}"/>
                 <ComboBox 
                     materialDesign:HintAssist.Hint="{DynamicResource mForUser}"
-                    ItemsSource="{Binding Users}"
                     DisplayMemberPath="Login"
-                    Margin="5"
-                    SelectedValue="{Binding SelectedUser}"/>
+                    SelectedValue="{Binding SelectedUser}"
+                    ItemsSource="{Binding Users}"
+                    Margin="5"/>
                 <DatePicker 
-                    Margin="5"
                     DisplayDateStart="{Binding StartDay}"
+                    SelectedDate="{Binding TaskFinishDate}"
                     materialDesign:HintAssist.Hint="{DynamicResource mEndDate}"
-                    SelectedDate="{Binding TaskFinishDate}"/>
+                    Margin="5"/>
             </StackPanel>
-            <StackPanel
-                Grid.Row="1"
-                Orientation="Horizontal"
-                HorizontalAlignment="Right">
+            <Grid
+                Margin="0 10 0 0"
+                Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition 
+                        Width="*"/>
+                    <ColumnDefinition 
+                        Width="*"/>
+                </Grid.ColumnDefinitions>
                 <Button
-                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Grid.Column="0"
+                    Style="{StaticResource Accept}"
                     Command="{Binding Change}"
-                    IsDefault="True"
-                    Margin="5"
-                    Content="ACCEPT"/>
+                    Content="{DynamicResource MAccept}"/>
                 <Button
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    IsCancel="True"
-                    Margin="5"
+                    Grid.Column="1"
+                    Style="{StaticResource Cancel}"
                     Command="materialDesign:DialogHost.CloseDialogCommand"
-                    Content="CANCEL"/>
-            </StackPanel>
+                    Content="{DynamicResource MCancel}"/>
+            </Grid>
         </Grid>
     </materialDesign:DialogHost>
 </UserControl>

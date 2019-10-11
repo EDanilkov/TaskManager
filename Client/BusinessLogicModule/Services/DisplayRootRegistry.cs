@@ -1,11 +1,12 @@
-﻿using System;
+﻿using BusinessLogicModule.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace BusinessLogicModule.Services
 {
-    public class DisplayRootRegistry
+    public class DisplayRootRegistry : IDisplayRootRegistry
     {
         Dictionary<Type, Type> vmToWindowMapping = new Dictionary<Type, Type>();
 

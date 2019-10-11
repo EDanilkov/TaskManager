@@ -22,12 +22,12 @@ namespace ServerAPI.Controllers
         }
         
         [HttpPost("new")]
-        public IActionResult AddUserProject([FromBody]UserProject userProject)
+        public async Task<IActionResult> AddUserProject([FromBody]UserProject userProject)
         {
             NewUserProjectResponseModel newUserProjectResponseModel = new NewUserProjectResponseModel();
             try
             {
-                _db.AddUserProject(userProject);
+                await _db.AddUserProject(userProject);
                 newUserProjectResponseModel.Message = "Success !!!";
                 newUserProjectResponseModel.CreatedUserId = userProject.UserId;
                 newUserProjectResponseModel.CreatedProjectId = userProject.ProjectId;

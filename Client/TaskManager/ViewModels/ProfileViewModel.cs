@@ -78,6 +78,28 @@ namespace UIModule.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private Visibility _notProjectsVisibility = Visibility.Collapsed;
+        public Visibility NotProjectsVisibility
+        {
+            get { return _notProjectsVisibility; }
+            set
+            {
+                _notProjectsVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Visibility _dataGridVisibility = Visibility.Collapsed;
+        public Visibility DataGridVisibility
+        {
+            get { return _dataGridVisibility; }
+            set
+            {
+                _dataGridVisibility = value;
+                OnPropertyChanged();
+            }
+        }
         
 
 
@@ -110,7 +132,18 @@ namespace UIModule.ViewModels
                             records.Add(record);
                         }
                         ListRecords = records;
-                        TaskInfo = ListRecords.Count == 0 ? "You don't have Tasks." : "Tasks:";
+                        if (ListRecords.Count == 0)
+                        {
+                            DataGridVisibility = Visibility.Collapsed;
+                            NotProjectsVisibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            DataGridVisibility = Visibility.Visible;
+                            NotProjectsVisibility = Visibility.Collapsed;
+                        }
+
+                           // TaskInfo = ListRecords.Count == 0 ? "You don't have Tasks." : "Tasks:";
                     }
                     catch (Exception ex)
                     {
@@ -125,7 +158,7 @@ namespace UIModule.ViewModels
         {
             get
             {
-                return new DelegateCommand(async (obj) =>
+                return new DelegateCommand((obj) =>
                 {
                     try
                     {

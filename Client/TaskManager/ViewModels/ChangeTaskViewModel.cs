@@ -134,7 +134,7 @@ namespace UIModule.ViewModels
                         Task task = (await _taskRepository.GetTasks()).Find(c => c.Id == taskId);
                         await _taskRepository.ChangeTask(task, TaskName, TaskDescription, SelectedUser.Id, TaskFinishDate);
                         
-                        logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " changed task " + TaskName + " to the project " + _projectRepository.GetProject(projectId));
+                        logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " changed task " + TaskName + " to the project " + (await _projectRepository.GetProject(projectId)).Name);
                         MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                     }
                     catch (Exception ex)

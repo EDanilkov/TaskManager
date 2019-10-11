@@ -79,7 +79,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IDisplayRootRegistry.cs" />
     <Compile Include="Services\DisplayRootRegistry.cs" />
+    <Compile Include="Services\HttpClientAccessor.cs" />
     <Compile Include="Services\RequestService.cs" />
     <Compile Include="Interfaces\IPermissionRepository.cs" />
     <Compile Include="Interfaces\IProjectRepository.cs" />

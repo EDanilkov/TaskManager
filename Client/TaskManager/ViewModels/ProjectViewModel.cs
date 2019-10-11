@@ -423,7 +423,8 @@ namespace UIModule.ViewModels
                             ListUserTask = await _taskRepository.GetProjectTasksByUser(user.Id, projectId);
                             ListTasksText = ListUserTask.Count == 0 ? Application.Current.Resources["m_member_dont_have_tasks"].ToString() : Application.Current.Resources["mTasks"].ToString();
                             MemberInfo = Visibility.Visible;
-                            SelectedChangeRole = await _roleRepository.GetRoleFromUser(SelectedMember.Login, projectId);
+                            Role role = await _roleRepository.GetRoleFromUser(SelectedMember.Login, projectId);
+                            SelectedChangeRole = RoleSourse.Find(c => c.Id == role.Id);
                         }
 
                     }
@@ -494,13 +495,7 @@ namespace UIModule.ViewModels
                         TaskInfo = Visibility.Collapsed;
                         Role role = await _roleRepository.GetRoleFromUser(userName, projectId);
                         await SelectVisibility(role);
-                        Project project = await _projectRepository.GetProject(projectId);
-                        ProjectDescription = project.Description;
-                        TitleName += "/" + project.Name;
-                        ListTasks = (await _taskRepository.GetTasksFromProject(projectId));
-                        RoleSourse = await _roleRepository.GetRoles();
-                        await RefreshUsers();
-                    
+
                         if (string.Equals((await _roleRepository.GetRoleFromUser(userName, projectId)).Name, "Admin"))
                         {
                             VisibilityMembers = Visibility.Visible;
@@ -509,6 +504,14 @@ namespace UIModule.ViewModels
                         {
                             DeleteProjectVisibility = Visibility.Visible;
                         }
+
+                        Project project = await _projectRepository.GetProject(projectId);
+                        ProjectDescription = project.Description;
+                        TitleName += "/" + project.Name;
+                        ListTasks = (await _taskRepository.GetTasksFromProject(projectId));
+                        RoleSourse = await _roleRepository.GetRoles();
+                        await RefreshUsers();
+                    
                     }
                     catch (Exception ex)
                     {
@@ -696,13 +699,13 @@ namespace UIModule.ViewModels
         {
             get
             {
-                return new DelegateCommand((ex) =>
+                return new DelegateCommand((obj) =>
                 {
                     try
                     {
                         Underline = null;
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
                         logger.Error(ex.ToString());
                     }

@@ -220,15 +220,8 @@ namespace ServerAPI.Data
         
         public async TaskThreading AddUser(User user)
         {
-            try
-            {
-                await _db.User.AddAsync(user);
-                await _db.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-
-            }
+            await _db.User.AddAsync(user);
+            await _db.SaveChangesAsync();
         }
         
         public async Task<Role> GetRoleFromUser(string userName, int projectId)

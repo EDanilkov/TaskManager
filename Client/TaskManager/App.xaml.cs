@@ -12,9 +12,6 @@ using UIModule.Views;
 
 namespace UIModule
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private static List<CultureInfo> m_Languages = new List<CultureInfo>();
@@ -31,8 +28,6 @@ namespace UIModule
 
         public App()
         {
-
-
             displayRootRegistry.RegisterWindowType<AuthorizationWindowViewModel, AuthorizationWindow>();
             displayRootRegistry.RegisterWindowType<MainWindowViewModel, MainWindow>();
 

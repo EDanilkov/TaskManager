@@ -11,56 +11,104 @@ namespace BusinessLogicModule.Services
 {
     public static class RequestService
     {
-        static HttpClient _client = new HttpClient();
-        
+        static HttpClient _client = HttpClientAccessor.HttpClient;
+
         public static async Task<T> Get<T>(string path)
         {
-            _client.DefaultRequestHeaders.Authorization =
-                 new AuthenticationHeaderValue("Bearer", Resources.Token);
-            HttpResponseMessage response = await _client.GetAsync(new Uri(path));
-            if (!response.IsSuccessStatusCode)
+            int attemptCount = 0;
+            while(attemptCount < 5)
             {
-                throw new Exception("Error status code: " + (int)response.StatusCode + " - " + response.StatusCode.ToString());
+                HttpResponseMessage response = await _client.GetAsync(new Uri(path));
+                if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    _client = HttpClientAccessor.HttpClient;
+                    attemptCount++;
+                    continue;
+                }
+                else
+                {
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new Exception("Error status code: " + (int)response.StatusCode + " - " + response.StatusCode.ToString());
+                    }
+                    return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+                }
             }
-            return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+            throw new Exception("The user is not authorized");
         }
 
         public static async Task<NewResponseModel> Post(string path, string json)
         {
-            _client.DefaultRequestHeaders.Authorization =
-                 new AuthenticationHeaderValue("Bearer", Resources.Token);
             var content = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PostAsync(path, content);
-            if (!response.IsSuccessStatusCode)
+            int attemptCount = 0;
+            while (attemptCount < 5)
             {
-                throw new Exception("Error status code: " + (int)response.StatusCode + " - " + response.StatusCode.ToString());
+                HttpResponseMessage response = await _client.PostAsync(path, content);
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    _client = HttpClientAccessor.HttpClient;
+                    attemptCount++;
+                    continue;
+                }
+                else
+                {
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new Exception("Error status code: " + (int)response.StatusCode + " - " + response.StatusCode.ToString());
+                    }
+                    return JsonConvert.DeserializeObject<NewResponseModel>(await response.Content.ReadAsStringAsync());
+                }
             }
-            return JsonConvert.DeserializeObject<NewResponseModel>(await response.Content.ReadAsStringAsync());
+            throw new Exception("The user is not authorized");
         }
 
         public static async Task<NewResponseModel> Put(string path, string json)
         {
-            _client.DefaultRequestHeaders.Authorization =
-                 new AuthenticationHeaderValue("Bearer", Resources.Token);
             var content = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PutAsync(path, content);
-            if (!response.IsSuccessStatusCode)
+            int attemptCount = 0;
+            while (attemptCount < 5)
             {
-                throw new Exception("Error status code: " + (int)response.StatusCode + " - " + response.StatusCode.ToString());
+                HttpResponseMessage response = await _client.PutAsync(path, content);
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    _client = HttpClientAccessor.HttpClient;
+                    attemptCount++;
+                    continue;
+                }
+                else
+                {
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new Exception("Error status code: " + (int)response.StatusCode + " - " + response.StatusCode.ToString());
+                    }
+                    return JsonConvert.DeserializeObject<NewResponseModel>(await response.Content.ReadAsStringAsync());
+                }
             }
-            return JsonConvert.DeserializeObject<NewResponseModel>(await response.Content.ReadAsStringAsync());
+            throw new Exception("The user is not authorized");
         }
 
         public static async Task<NewResponseModel> Delete(string path)
         {
-            _client.DefaultRequestHeaders.Authorization =
-                 new AuthenticationHeaderValue("Bearer", Resources.Token);
-            HttpResponseMessage response = await _client.DeleteAsync(new Uri(path));
-            if (!response.IsSuccessStatusCode)
+            int attemptCount = 0;
+            while (attemptCount < 5)
             {
-                throw new Exception("Error status code: " + (int)response.StatusCode + " - " + response.StatusCode.ToString());
+                HttpResponseMessage response = await _client.DeleteAsync(new Uri(path));
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    _client = HttpClientAccessor.HttpClient;
+                    attemptCount++;
+                    continue;
+                }
+                else
+                {
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new Exception("Error status code: " + (int)response.StatusCode + " - " + response.StatusCode.ToString());
+                    }
+                    return JsonConvert.DeserializeObject<NewResponseModel>(await response.Content.ReadAsStringAsync());
+                }
             }
-            return JsonConvert.DeserializeObject<NewResponseModel>(await response.Content.ReadAsStringAsync());
+            throw new Exception("The user is not authorized");
         }
     }
 }

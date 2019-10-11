@@ -22,13 +22,13 @@ namespace ServerAPI.Controllers
         }
 
         [HttpPost("new")]
-        public IActionResult AddRole([FromBody]Role role)
+        public async Task<IActionResult> AddRole([FromBody]Role role)
         {
 
             NewResponseModel newRoleResponseModel = new NewResponseModel();
             try
             {
-                _db.AddRole(role);
+                await _db.AddRole(role);
                 newRoleResponseModel.Message = "Success !!!";
                 newRoleResponseModel.CreatedId = role.Id;
                 return Ok(newRoleResponseModel);

@@ -8,6 +8,8 @@
     <v:String x:Key="MNewMember">NEW MEMBER</v:String>
     <v:String x:Key="MNewTask">NEW TASK</v:String>
     <v:String x:Key="MAccept">ACCEPT</v:String>
+    <v:String x:Key="MChangeTask">CHANGE TASK</v:String>
+    <v:String x:Key="MConfirm">CONFIRMATION</v:String>
     <v:String x:Key="MOk">OK</v:String>
     <v:String x:Key="MCancel">CANCEL</v:String>
     <v:String x:Key="MError">ERROR</v:String>
@@ -19,6 +21,7 @@
     <v:String x:Key="mPersonal">Personal</v:String>
     <v:String x:Key="mFilterByName">Filter by name...</v:String>
     <v:String x:Key="mNoPersonalProjects">This user doesn't have any personal projects</v:String>
+    <v:String x:Key="mNoTasks">You don't have any tasks</v:String>
     <v:String x:Key="mProjects">PROJECTS</v:String>
     <v:String x:Key="mTasks">Tasks</v:String>
     <v:String x:Key="mDescription">Description</v:String>

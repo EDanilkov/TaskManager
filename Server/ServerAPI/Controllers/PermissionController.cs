@@ -22,13 +22,13 @@ namespace ServerAPI.Controllers
         }
 
         [HttpPost("new")]
-        public IActionResult AddPermission([FromBody]Permission permission)
+        public async Task<IActionResult> AddPermission([FromBody]Permission permission)
         {
 
             NewResponseModel newPermissionResponseModel = new NewResponseModel();
             try
             {
-                _db.AddPermission(permission);
+                await _db.AddPermission(permission);
                 newPermissionResponseModel.Message = "Success !!!";
                 newPermissionResponseModel.CreatedId = permission.Id;
                 return Ok(newPermissionResponseModel);

@@ -55,13 +55,29 @@
                 Grid.Column="1"
                 Style="{DynamicResource VerticalStackPanel}">
                 <Separator/>
-                <TextBlock 
+                <StackPanel
+                    Margin="20"
+                    Visibility="{Binding NotProjectsVisibility}"
+                    Orientation="Vertical">
+                    <materialDesign:PackIcon 
+                        Style="{DynamicResource CodeNotEqualVariant}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                        Text="{DynamicResource mNoTasks}"/>
+                </StackPanel>
+
+
+                <StackPanel
+                    Visibility="{Binding DataGridVisibility}"
+                    Orientation="Vertical">
+                    <TextBlock 
                     Margin="5"
-                    Text="{Binding TaskInfo}"
+                    Text="{DynamicResource mTasks}"
                     Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
-                <ScrollViewer 
+                    <ScrollViewer 
                     VerticalScrollBarVisibility="Auto">
-                    <DataGrid 
+                        <DataGrid 
                         MaxHeight="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         GridLinesVisibility="Horizontal"
                         IsReadOnly="True"  
@@ -71,13 +87,15 @@
                         Foreground="Black"
                         ItemsSource="{Binding ListRecords}" 
                         SelectedValue="{Binding SelectedTask}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding SelectionChanged}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </DataGrid>
-                </ScrollViewer>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectionChanged}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DataGrid>
+                    </ScrollViewer>
+                </StackPanel>
+                
 
 
 
