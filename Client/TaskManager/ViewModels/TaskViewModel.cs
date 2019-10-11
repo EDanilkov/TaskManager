@@ -323,25 +323,32 @@ namespace UIModule.ViewModels
 
         private async void ChangeTask(object o)
         {
-            var view = new Pages.ChangeTask
+            try
             {
-                DataContext = new ChangeTaskViewModel(_userRepository, _taskRepository, _projectRepository)
-            };
+                var view = new Pages.ChangeTask
+                {
+                    DataContext = new ChangeTaskViewModel(_userRepository, _taskRepository, _projectRepository)
+                };
 
-            var result = await DialogHost.Show(view, _dialogIdentifier);
-            
-            string userName = System.Windows.Application.Current.Properties["UserName"].ToString();
-            int taskId = int.Parse(System.Windows.Application.Current.Properties["TaskId"].ToString());
-            int projectId = int.Parse(System.Windows.Application.Current.Properties["ProjectId"].ToString());
-            Task task = await _taskRepository.GetTask(taskId);
-            TitleName = "";
-            TitleName += "/" + task.Name;
-            Project project = await _projectRepository.GetProject(projectId);
-            TitleProject = "";
-            TitleProject += project.Name;
-            UserName = ": " + (await _userRepository.GetUser(id: task.UserId)).Login;
-            TaskDescriprion = task.Description;
-            TaskFinishDate = ": " + task.EndDate.ToShortDateString();
+                var result = await DialogHost.Show(view, _dialogIdentifier);
+
+                string userName = System.Windows.Application.Current.Properties["UserName"].ToString();
+                int taskId = int.Parse(System.Windows.Application.Current.Properties["TaskId"].ToString());
+                int projectId = int.Parse(System.Windows.Application.Current.Properties["ProjectId"].ToString());
+                Task task = await _taskRepository.GetTask(taskId);
+                TitleName = "";
+                TitleName += "/" + task.Name;
+                Project project = await _projectRepository.GetProject(projectId);
+                TitleProject = "";
+                TitleProject += project.Name;
+                UserName = ": " + (await _userRepository.GetUser(id: task.UserId)).Login;
+                TaskDescriprion = task.Description;
+                TaskFinishDate = ": " + task.EndDate.ToShortDateString();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+            }
         }
     }
 }

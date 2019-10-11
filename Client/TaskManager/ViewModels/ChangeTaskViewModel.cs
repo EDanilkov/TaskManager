@@ -105,10 +105,14 @@ namespace UIModule.ViewModels
                 {
                     try
                     {
-                        StartDay = DateTime.Now;
-                        TaskFinishDate = DateTime.Now;
                         int projectId = int.Parse(Application.Current.Properties["ProjectId"].ToString());
                         Users = await _userRepository.GetUsersFromProject(projectId);
+                        Task task = await _taskRepository.GetTask(int.Parse(Application.Current.Properties["TaskId"].ToString()));
+                        TaskName = task.Name;
+                        TaskDescription = task.Description;
+                        TaskFinishDate = task.EndDate;
+                        SelectedUser = Users.Find(c => c.Id == task.UserId);
+                        StartDay = DateTime.Now;
 
                     }
                     catch (Exception ex)
@@ -128,14 +132,21 @@ namespace UIModule.ViewModels
                 {
                     try
                     {
-                        int projectId = int.Parse(Application.Current.Properties["ProjectId"].ToString());
-                        int taskId = (await _taskRepository.GetTask(int.Parse(Application.Current.Properties["TaskId"].ToString()))).Id;
+                        if (TaskName != null && TaskDescription != null && SelectedUser != null && TaskFinishDate != null && TaskFinishDate >= DateTime.Today)
+                        {
+                            int projectId = int.Parse(Application.Current.Properties["ProjectId"].ToString());
+                            int taskId = (await _taskRepository.GetTask(int.Parse(Application.Current.Properties["TaskId"].ToString()))).Id;
                         
-                        Task task = (await _taskRepository.GetTasks()).Find(c => c.Id == taskId);
-                        await _taskRepository.ChangeTask(task, TaskName, TaskDescription, SelectedUser.Id, TaskFinishDate);
+                            Task task = (await _taskRepository.GetTasks()).Find(c => c.Id == taskId);
+                            await _taskRepository.ChangeTask(task, TaskName, TaskDescription, SelectedUser.Id, TaskFinishDate);
                         
-                        logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " changed task " + TaskName + " to the project " + (await _projectRepository.GetProject(projectId)).Name);
-                        MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+                            logger.Debug("user " + Application.Current.Properties["UserName"].ToString() + " changed task " + TaskName + " to the project " + (await _projectRepository.GetProject(projectId)).Name);
+                            MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+                        }
+                        else
+                        {
+                            ErrorHandler.Show(Application.Current.Resources["m_correct_entry"].ToString(), _dialogIdentifier);
+                        }
                     }
                     catch (Exception ex)
                     {

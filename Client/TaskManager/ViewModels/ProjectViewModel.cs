@@ -37,20 +37,6 @@ namespace UIModule.ViewModels
         #region Properties
 
 
-        public ICommand AddNewTaskClick => new DelegateCommand(AddNewTask);
-
-        private async void AddNewTask(object o)
-        {
-            var view = new Pages.AddNewTask
-            {
-                DataContext = new AddNewTaskViewModel(_userRepository, _taskRepository, _projectRepository)
-            };
-
-            var result = await DialogHost.Show(view, _dialogIdentifier);
-            int projectId = int.Parse(System.Windows.Application.Current.Properties["ProjectId"].ToString());
-            ListTasks = (await _taskRepository.GetTasksFromProject(projectId));
-        }
-
         private string _titleName;
         public string TitleName
         {
@@ -757,6 +743,29 @@ namespace UIModule.ViewModels
                 await RefreshUsers();
             }
             catch(Exception ex)
+            {
+                logger.Error(ex.ToString());
+            }
+        }
+
+
+
+        public ICommand AddNewTaskClick => new DelegateCommand(AddNewTask);
+
+        private async void AddNewTask(object o)
+        {
+            try
+            {
+                var view = new Pages.AddNewTask
+                {
+                    DataContext = new AddNewTaskViewModel(_userRepository, _taskRepository, _projectRepository)
+                };
+
+                var result = await DialogHost.Show(view, _dialogIdentifier);
+                int projectId = int.Parse(System.Windows.Application.Current.Properties["ProjectId"].ToString());
+                ListTasks = (await _taskRepository.GetTasksFromProject(projectId));
+            }
+            catch (Exception ex)
             {
                 logger.Error(ex.ToString());
             }

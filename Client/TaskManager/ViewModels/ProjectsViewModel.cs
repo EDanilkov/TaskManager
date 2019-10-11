@@ -289,29 +289,43 @@ namespace UIModule.ViewModels
 
         private void CheckCountProjects(List<RecordListBox> recordListBoxes)
         {
-            if (recordListBoxes.Count == 0)
+            try
             {
-                ProjectsVisibility = Visibility.Collapsed;
-                NotProjectsVisibility = Visibility.Visible;
+                if (recordListBoxes.Count == 0)
+                {
+                    ProjectsVisibility = Visibility.Collapsed;
+                    NotProjectsVisibility = Visibility.Visible;
+                }
+                else
+                {
+                    ProjectsVisibility = Visibility.Visible;
+                    NotProjectsVisibility = Visibility.Collapsed;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ProjectsVisibility = Visibility.Visible;
-                NotProjectsVisibility = Visibility.Collapsed;
+                logger.Error(ex.ToString());
             }
         }
         
-        public ICommand NewProjectClick => new DelegateCommand(ExecuteRunDialog);
+        public ICommand NewProjectClick => new DelegateCommand(NewProject);
 
-        private async void ExecuteRunDialog(object o)
+        private async void NewProject(object o)
         {
-            var view = new Pages.AddNewProject
+            try
             {
-                DataContext = new AddNewProjectViewModel(_userRepository, _projectRepository)
-            };
-            
-            var result = await DialogHost.Show(view, _dialogIdentifier);
-            ListProjects = await GetRecordListBoxes();
+                var view = new Pages.AddNewProject
+                {
+                    DataContext = new AddNewProjectViewModel(_userRepository, _projectRepository)
+                };
+
+                var result = await DialogHost.Show(view, _dialogIdentifier);
+                ListProjects = await GetRecordListBoxes();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+            }
         }
         #endregion
     }

@@ -19,7 +19,6 @@
         <Grid>
             <Rectangle Style="{DynamicResource Rectangle}"/>
             <Rectangle Style="{DynamicResource CenterRectangle}"/>
-
             <Grid 
                 Style="{DynamicResource Authorization}">
                 <Label 

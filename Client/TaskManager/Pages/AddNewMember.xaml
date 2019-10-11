@@ -16,7 +16,7 @@
     </i:Interaction.Triggers>
 
     <materialDesign:DialogHost
-        Identifier="AddMamberDialog"
+        Identifier="AddMemberDialog"
         CloseOnClickAway="True">
         <Grid Margin="15">
             <Grid.ColumnDefinitions>

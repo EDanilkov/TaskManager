@@ -128,7 +128,7 @@ namespace UIModule.ViewModels
                 {
                     try
                     {
-                        if(TaskName != null && TaskDescription != null && SelectedUser != null && TaskFinishDate != null)
+                        if(TaskName != null && TaskDescription != null && SelectedUser != null && TaskFinishDate != null && TaskFinishDate >= DateTime.Today)
                         {
                             int projectId = int.Parse(System.Windows.Application.Current.Properties["ProjectId"].ToString());
                             Task task = new Task()
