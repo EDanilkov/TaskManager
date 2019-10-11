@@ -423,8 +423,8 @@ namespace UIModule.ViewModels
                             ListUserTask = await _taskRepository.GetProjectTasksByUser(user.Id, projectId);
                             ListTasksText = ListUserTask.Count == 0 ? Application.Current.Resources["m_member_dont_have_tasks"].ToString() : Application.Current.Resources["mTasks"].ToString();
                             MemberInfo = Visibility.Visible;
-                            Role role = await _roleRepository.GetRoleFromUser(SelectedMember.Login, projectId);
-                            SelectedChangeRole = RoleSourse.Find(c => c.Id == role.Id);
+                            Role memberRole = await _roleRepository.GetRoleFromUser(SelectedMember.Login, projectId);
+                            SelectedChangeRole = RoleSourse.Find(c => c.Id == memberRole.Id);
                         }
 
                     }
